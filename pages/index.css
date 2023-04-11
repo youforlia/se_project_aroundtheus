@@ -1,3 +1,5 @@
+@import url(../vendor/fonts.css);
+
 .page {
   background-color: #000;
   color: #fff;
@@ -37,7 +39,7 @@
 .profile__info {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-areas:
     "title edit-button"
     "description description";
@@ -59,23 +61,25 @@
   height: 22px;
   width: 22px;
   padding: 20px 64px;
-  margin: 75px 0 60px auto;
+  margin: 75px 0 70px auto;
 }
 
 .profile__title {
-  font-size: 42px;
-  font-family: "IBM Plex Serif";
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 500;
+  font-size: 42px;
   line-height: 48px;
   margin: 0;
   grid-area: title;
 }
 
 .profile__description {
-  font-size: 18px;
-  font-family: "IBM Plex Serif";
-  line-height: 22px;
+  font-family: "Inter";
+  font-style: normal;
   font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
   grid-area: description;
   margin: 0;
 }
@@ -131,9 +135,31 @@
   margin-right: 0;
 }
 
+.card__title {
+  font-family: Inter, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
 .card__like-button {
   background: transparent url(../images/heart-icon.svg) center no-repeat;
   width: 21px;
   height: 18px;
   border: 0;
+}
+
+.footer {
+  max-width: 880px;
+  margin: 67px 762px 60px 200px;
+}
+.footer__copyright {
+  background-color: transparent;
+  color: #545454;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
 }

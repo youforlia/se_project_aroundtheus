@@ -17,12 +17,10 @@
 }
 
 @font-face {
-  src: url(https://practicum-content.s3.us-west-1.amazonaws.com/fonts/moved_Ibmplexserif.woff2)
-      format("woff2"),
-    url(https://practicum-content.s3.us-west-1.amazonaws.com/fonts/moved_Ibmplexserif.woff)
-      format("woff"),
-    url(https://practicum-content.s3.us-west-1.amazonaws.com/fonts/moved_Ibmplexserif.ttf)
-      format("truetype");
-  font-family: "IBM Plex Serif";
-  font-weight: normal;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("fonts/Inter-Black.woff") format("woff"),
+    url("fonts/Inter-Black.wof2f") format("woff2");
 }

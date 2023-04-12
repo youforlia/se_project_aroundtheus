@@ -6,13 +6,13 @@
   justify-content: center;
 }
 
-.card__image {
+.cards__image {
   width: 282px;
   height: 282px;
   margin-bottom: -5px;
 }
 
-.card__description {
+.cards__description {
   display: flex;
   background-color: #fff;
   color: #000;
@@ -24,7 +24,7 @@
   margin-right: 0;
 }
 
-.card__title {
+.cards__title {
   font-family: Inter, serif;
   font-style: normal;
   font-weight: 900;
@@ -35,7 +35,7 @@
   overflow: hidden;
 }
 
-.card__like-button {
+.cards__like-button {
   background: transparent url(../images/heart-icon.svg) center no-repeat;
   width: 21px;
   height: 18px;

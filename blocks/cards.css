@@ -41,3 +41,21 @@
   height: 18px;
   border: 0;
 }
+
+@media screen and (max-width: 665px) {
+  .cards {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .cards {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cards {
+    margin-left: 19px;
+  }
+}

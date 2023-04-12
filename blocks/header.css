@@ -8,3 +8,58 @@
   border: 1px solid #545454;
   margin-top: 30px;
 }
+
+@media screen and (max-width: 1100px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .solid-line {
+    margin: 32px 10px 0;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .solid-line {
+    margin: 32px 10px 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .solid-line {
+    margin: 32px 10px 0;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .header {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .solid-line {
+    width: 100vw;
+    margin: 32px 0 0;
+  }
+}

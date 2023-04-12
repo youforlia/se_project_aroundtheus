@@ -1,0 +1,11 @@
+.footer__copyright {
+  background-color: transparent;
+  color: #545454;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 67px;
+  margin-bottom: 60px;
+}

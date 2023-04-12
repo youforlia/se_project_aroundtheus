@@ -1,39 +1,46 @@
 @import url(../vendor/fonts.css);
 
+/* Page Section */
+
 .page {
   background-color: #000;
   color: #fff;
+  max-width: 1280px;
+  margin: auto;
 }
 
 .page__content {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  max-width: 880px;
+  margin: 0 200px 0;
 }
 
 .page__section {
-  max-width: 880px;
   width: 100%;
   position: relative;
-  margin: 0 auto;
 }
+
+/* header Section */
 
 .header {
   margin-top: 45px;
-  max-width: 880px;
 }
 
 .solid-line {
-  max-width: 880px;
   height: 0px;
   opacity: 0.7;
   border: 1px solid #545454;
   margin-top: 30px;
 }
 
+/* Profile Section */
+
 .profile {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .profile__info {
@@ -53,7 +60,7 @@
   grid-area: edit-button;
   height: 15px;
   width: 15px;
-  padding: 8px;
+  padding: 10px;
 }
 
 .profile__add-button {
@@ -91,30 +98,13 @@
   margin-right: 24px;
 }
 
-.card__image {
-  width: 282px;
-  height: 282px;
-}
+/* Cards Section */
 
 .cards {
-  /* fonts */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, 282px);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 20px 17px;
-  max-width: 880px;
-  margin: 40px auto;
-}
-
-.card {
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center; */
-}
-
-.cards__content {
-  /* later */
 }
 
 .card__image {
@@ -141,6 +131,9 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
@@ -150,10 +143,8 @@
   border: 0;
 }
 
-.footer {
-  max-width: 880px;
-  margin: 67px 762px 60px 200px;
-}
+/* Footer Section */
+
 .footer__copyright {
   background-color: transparent;
   color: #545454;
@@ -162,4 +153,155 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  margin-top: 67px;
+  margin-bottom: 60px;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 1100px) {
+  .page__content {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .header {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  /* .page {
+    overflow-x: hidden;
+  } */
+
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .page__content {
+    max-width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .solid-line {
+    width: 100vw;
+    margin: 32px 20px 0;
+  }
+
+  .profile {
+    margin: 40px 0 40px 20px;
+  }
+
+  .profile__info {
+  }
+
+  /* .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+    margin-left: 43px;
+  } */
+
+  .profile__add-button {
+    margin-left: -40px;
+  }
+
+  /* 
+  .profile__edit-button {
+    margin-right: -15px;
+    margin-top: 3px;
+    height: 7px;
+    width: 7px;
+    padding: 8px;
+  } */
+
+  .profile__description {
+    margin-top: 14px;
+    width: 100px;
+  }
+
+  .cards {
+    margin-left: 100px;
+  }
+
+  /* .footer__copyright {
+    margin-left: 20px;
+  } */
+}
+
+@media screen and (max-width: 665px) {
+}
+
+@media screen and (max-width: 470px) {
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+  }
+
+  .page__content {
+    max-width: 100vw;
+    margin: 0;
+  }
+
+  .solid-line {
+    width: 100vw;
+    margin: 32px 0 0;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+
+  .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+    margin-left: 43px;
+  }
+
+  .profile__add-button {
+    background: transparent url(../images/plus-icon.svg) center no-repeat;
+    height: 16px;
+    width: 16px;
+    padding: 20px 140px;
+    margin: 53px 19px 36px;
+  }
+
+  .profile__edit-button {
+    margin-right: -15px;
+    margin-top: 3px;
+    height: 7px;
+    width: 7px;
+    padding: 8px;
+  }
+
+  .profile__description {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  .cards {
+    margin-left: 19px;
+  }
+}
+
+.footer__copyright {
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 48px;
+  margin-bottom: 36px;
+  margin-left: 19px;
 }

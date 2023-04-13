@@ -2,11 +2,11 @@
   margin-top: 45px;
 }
 
-.solid-line {
-  height: 0px;
-  opacity: 0.7;
-  border: 1px solid #545454;
-  margin-top: 30px;
+.header::after {
+  content: "";
+  display: block;
+  border-top: 1px solid #545454;
+  margin: 41px 0 10px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -14,10 +14,6 @@
     width: 126px;
     height: 24px;
     margin-left: 27px;
-  }
-
-  .solid-line {
-    margin: 32px 10px 0;
   }
 }
 
@@ -27,10 +23,6 @@
     height: 24px;
     margin-left: 27px;
   }
-
-  .solid-line {
-    margin: 32px 10px 0;
-  }
 }
 
 @media screen and (max-width: 800px) {
@@ -38,10 +30,6 @@
     width: 126px;
     height: 24px;
     margin-left: 27px;
-  }
-
-  .solid-line {
-    margin: 32px 10px 0;
   }
 }
 
@@ -56,10 +44,5 @@
     width: 126px;
     height: 24px;
     margin-left: 27px;
-  }
-
-  .solid-line {
-    width: 100vw;
-    margin: 32px 0 0;
   }
 }

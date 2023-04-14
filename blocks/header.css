@@ -5,6 +5,7 @@
 .header::after {
   content: "";
   display: block;
+  opacity: 0.7;
   border-top: 1px solid #545454;
   margin: 41px 0 10px;
 }
@@ -17,32 +18,8 @@
   }
 }
 
-@media screen and (max-width: 999px) {
-  .header__logo {
-    width: 126px;
-    height: 24px;
-    margin-left: 27px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .header__logo {
-    width: 126px;
-    height: 24px;
-    margin-left: 27px;
-  }
-}
-
 @media screen and (max-width: 665px) {
   .header {
     max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .header__logo {
-    width: 126px;
-    height: 24px;
-    margin-left: 27px;
   }
 }

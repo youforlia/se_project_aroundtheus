@@ -17,23 +17,38 @@
 .profile__edit-button {
   background: transparent url(../images/pencil-icon.svg) center no-repeat;
   margin-left: 18px;
-  margin-top: 18px;
+  margin-top: 15px;
   grid-area: edit-button;
-  height: 15px;
-  width: 15px;
-  padding: 10px;
+  padding: 7px;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }
 
 .profile__add-button {
   background: transparent url(../images/plus-icon.svg) center no-repeat;
-  height: 22px;
-  width: 22px;
-  padding: 20px 64px;
+  padding: 14px 64px;
   margin: 75px 0 70px auto;
+  box-sizing: border-box;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }
 
 .profile__title {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -43,7 +58,7 @@
 }
 
 .profile__description {
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -61,39 +76,11 @@
 
 @media screen and (max-width: 1100px) {
   .profile {
-    margin: 40px 0 40px 20px;
+    margin: 40px 0;
   }
 
   .profile__add-button {
-    margin-left: -40px;
-  }
-
-  .profile__description {
-    margin-top: 14px;
-  }
-}
-
-@media screen and (max-width: 999px) {
-  .profile {
-    margin: 40px 0 40px 20px;
-  }
-
-  .profile__add-button {
-    margin-left: -40px;
-  }
-
-  .profile__description {
-    margin-top: 14px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .profile {
-    margin: 40px 0 40px 20px;
-  }
-
-  .profile__add-button {
-    margin-left: -40px;
+    margin-right: 45px;
   }
 
   .profile__description {
@@ -102,50 +89,43 @@
 }
 
 @media screen and (max-width: 665px) {
-  .profile__add-button {
-    margin-right: 30px;
-  }
-
   .profile__edit-button {
     margin-bottom: 30px;
-    margin-left: -40px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 320px) and (max-width: 665px) {
   .profile {
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .profile__title {
     font-size: 22px;
     line-height: 27px;
-    margin-left: 43px;
+    margin: 0 0 0 43px;
   }
 
   .profile__description {
     font-size: 14px;
     line-height: 17px;
-    width: 100px;
     height: 20px;
-    margin: -20px auto;
+    margin: 4px auto 0;
   }
 
   .profile__add-button {
     height: 16px;
     width: 16px;
     padding: 20px 140px;
-    margin-top: -30px;
+    margin-top: 36px;
     margin-left: 9px;
     margin-bottom: 36px;
   }
 
   .profile__edit-button {
-    margin-left: 8px;
-    margin-top: 4px;
+    margin: 4px 0 0 8px;
     height: 7px;
     width: 7px;
     padding: 8px;

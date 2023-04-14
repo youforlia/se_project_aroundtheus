@@ -33,7 +33,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 0;
 }
 
 .cards__like-button {

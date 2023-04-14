@@ -89,8 +89,17 @@
 }
 
 @media screen and (max-width: 665px) {
+  .profile__image {
+    margin: 0;
+  }
+
   .profile__edit-button {
     margin-bottom: 30px;
+  }
+
+  .profile__add-button {
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 
@@ -120,7 +129,6 @@
     width: 16px;
     padding: 20px 140px;
     margin-top: 36px;
-    margin-left: 9px;
     margin-bottom: 36px;
   }
 
@@ -129,5 +137,12 @@
     height: 7px;
     width: 7px;
     padding: 8px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 357px) {
+  .profile__title {
+    font-size: 18px;
+    line-height: 22px;
   }
 }

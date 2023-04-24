@@ -31,6 +31,7 @@
               type="button"
               aria-label="Edit"
               class="profile__edit-button"
+              id="profile-edit-btn"
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
@@ -142,9 +143,12 @@
       </footer>
 
       <!-- Modal Container Section -->
-      <div class="modal modal_opened">
+      <div class="modal" id="profile-edit-modal">
         <div class="modal__container">
-          <button class="modal__close-button"></button>
+          <button
+            class="modal__close-button"
+            id="profile-close-button"
+          ></button>
 
           <form class="modal__form">
             <h2 class="modal__form-header">Edit Profile</h2>

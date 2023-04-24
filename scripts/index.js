@@ -25,10 +25,16 @@ const initialCards = [
   },
 ];
 
-const weather = "wind";
+// Elements
 
-function discussWeather(weather) {
-  console.log(`How about this ${weather}?`);
-}
+const profileEditBtn = document.querySelector("#profile-edit-btn");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileCloseBtn = document.querySelector("#profile-close-button");
 
-discussWeather("rain");
+profileEditBtn.addEventListener("click", () => {
+  profileEditModal.classList.add("modal_opened");
+});
+
+profileCloseBtn.addEventListener("click", () => {
+  profileEditModal.classList.remove("modal_opened");
+});

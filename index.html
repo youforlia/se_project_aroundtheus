@@ -44,7 +44,7 @@
 
         <!-- Cards Section -->
         <section class="cards">
-          <div class="cards__content">
+          <!-- <div class="cards__content">
             <img
               src="./images/yosemite-valley.png"
               alt="yosemite valley"
@@ -133,7 +133,7 @@
                 class="cards__like-button"
               ></button>
             </div>
-          </div>
+          </div> -->
         </section>
       </main>
 
@@ -155,15 +155,17 @@
             <fieldset class="modal__form-fieldset">
               <input
                 type="text"
+                id="profile-title-input"
                 class="modal__form-input"
                 name="name"
-                value="Name"
+                value="name"
               />
               <input
                 type="text"
+                id="profile-description-input"
                 class="modal__form-input"
                 name="description"
-                value="Description"
+                value="description"
               />
             </fieldset>
             <fieldset class="modal__form-fieldset">
@@ -172,6 +174,26 @@
           </form>
         </div>
       </div>
+
+      <template id="card-template">
+        <div class="cards__content">
+          <img
+            src=""
+            alt=""
+            class="cards__image"
+          />
+          <div class="cards__description">
+            <h2 class="cards__title"></h2>
+            <button
+              type="button"
+              aria-label="Like"
+              class="cards__like-button"
+            ></button>
+          </div>
+        </div>
+      </template>
+
+
     </div>
     <script src="./scripts/index.js"></script>
   </body>

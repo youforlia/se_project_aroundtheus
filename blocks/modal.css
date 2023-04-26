@@ -82,7 +82,29 @@
   position: relative;
   top: 0;
   left: 425px;
-  /* position: absolute;
-  top: -40px;
-  right: -40px; */
+}
+
+@media screen and (max-width: 320px) {
+  .modal__form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 123px 19px;
+    max-width: 282px;
+    max-height: 322px;
+    padding: 25px 22px;
+  }
+
+  .modal__form-input {
+    min-width: 236px;
+    min-height: 35px;
+  padding: 0;
+  margin: 0 0 30px;
+  }
+
+  .modal__submit-button {
+    min-width: 236px;
+    margin-top: 48px;
+    padding: 0;
+  }
 }

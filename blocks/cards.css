@@ -6,11 +6,16 @@
   justify-content: center;
 }
 
+.cards__content {
+  position: relative;
+}
+
 .cards__image {
   display: block;
   width: 282px;
   height: 282px;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .cards__description {
@@ -45,6 +50,21 @@
   cursor: pointer;
 }
 
+.cards__like-button_active {
+  background: url(../images/heart-icon-filled.svg);
+}
+
 .cards__like-button:hover {
   opacity: 0.5;
+}
+
+.cards__delete-button {
+  background: transparent url(../images/trash.svg) center no-repeat;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19px;
+  border: 0;
+  cursor: pointer;
 }

@@ -32,23 +32,22 @@ const addCardModal = document.querySelector("#add-card-modal");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
 
-// Elements
+// Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
 const profileCloseBtn = profileEditModal.querySelector(".modal__close-button");
-const addCardCloseBtn = addCardModal.querySelector(".modal__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+
+// Elements Add Card Modal
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardContentEl = document.querySelector(".cards");
 const addCardBtn = document.querySelector(".profile__add-button");
-
-// const AddNewCardTitle = document.querySelector("#add-card-title-input");
-// const AddNewCardLink = document.querySelector("#add-card-link-input");
+const addCardCloseBtn = addCardModal.querySelector(".modal__close-button");
 const AddCardTitleInput = document.querySelector("#add-card-title-input");
 const AddCardLinkInput = document.querySelector("#add-card-link-input");
 
@@ -88,6 +87,20 @@ function getCardElement(cardData) {
   // access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".cards__image");
   const cardTitleEl = cardElement.querySelector(".cards__title");
+  // toggle like button
+  const likeBtn = cardElement.querySelector(".cards__like-button");
+  likeBtn.addEventListener("click", () => {
+    likeBtn.classList.toggle("cards__like-button_active");
+  });
+  // delete button
+  const deleteBtn = cardElement.querySelector(".cards__delete-button");
+
+  // const cards = document.querySelectorAll(".cards");
+  // cards.forEach((card) => {
+  //   const deleteBtn = document.createElement("span");
+  //   deleteBtn.innerHTML = '<svg class="cards__delete-button" ...></svg>';
+  // });
+
   // set the path to the image to the link field of the object
   const cardImageSrc = cardData.link;
   cardImageEl.setAttribute("src", cardImageSrc);

@@ -43,130 +43,7 @@
         </section>
 
         <!-- Cards Section -->
-        <section class="cards">
-          <!-- <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/yosemite-valley.png"
-              alt="yosemite valley"
-              class="cards__image"
-            />
-
-            <div class="cards__description">
-              <h2 class="cards__title">Yosemite Valley</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/lake-louise.png"
-              alt="lake louise"
-              class="cards__image"
-            />
-            <div class="cards__description">
-              <h2 class="cards__title">Lake Louise</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/bald-mountains.png"
-              alt="bald mountains"
-              class="cards__image"
-            />
-            <div class="cards__description">
-              <h2 class="cards__title">Bald Mountains</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/latemar.png"
-              alt="latemar"
-              class="cards__image"
-            />
-            <div class="cards__description">
-              <h2 class="cards__title">Latemar</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/vanoise-national-park.png"
-              alt="vanoise national park"
-              class="cards__image"
-            />
-            <div class="cards__description">
-              <h2 class="cards__title">Vanoise National Park</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          <div class="cards__content">
-            <button
-              type="button"
-              aria-label="Delete"
-              class="cards__delete-button"
-            ></button>
-            <img
-              src="./images/lago-di-braies.png"
-              alt="lago de braies"
-              class="cards__image"
-            />
-            <div class="cards__description">
-              <h2 class="cards__title">Lago de Braies</h2>
-              <button
-                type="button"
-                aria-label="Like"
-                class="cards__like-button"
-              ></button>
-            </div>
-          </div>
-          -->
-        </section>
+        <section class="cards"></section>
       </main>
 
       <!-- Footer Section -->
@@ -240,6 +117,20 @@
         </div>
       </div>
 
+      <!-- Preview Image Modal -->
+      <div class="modal" id="preview-image-modal">
+        <div class="modal__preview-container">
+          <button
+            class="modal__close-button"
+            id="preview-image-close-button"
+          ></button>
+
+          <img class="modal__preview-image" src="#" alt=" " />
+          <p class="modal__preview-title"></p>
+        </div>
+      </div>
+
+      <!-- Card Template -->
       <template id="card-template">
         <div class="cards__content">
           <img src="" alt="" class="cards__image" />
@@ -249,6 +140,11 @@
               type="button"
               aria-label="Like"
               class="cards__like-button"
+            ></button>
+            <button
+              type="button"
+              aria-label="Delete"
+              class="cards__delete-button"
             ></button>
           </div>
         </div>

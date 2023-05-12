@@ -48,8 +48,15 @@ const cardTemplate =
 const cardContentEl = document.querySelector(".cards");
 const addCardBtn = document.querySelector(".profile__add-button");
 const addCardCloseBtn = addCardModal.querySelector(".modal__close-button");
-const AddCardTitleInput = document.querySelector("#add-card-title-input");
-const AddCardLinkInput = document.querySelector("#add-card-link-input");
+const addCardTitleInput = document.querySelector("#add-card-title-input");
+const addCardLinkInput = document.querySelector("#add-card-link-input");
+
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImage = previewImageModal.querySelector(".modal__preview-image");
+const previewTitle = previewImageModal.querySelector(".modal__preview-title");
+const previewModalCloseBtn = previewImageModal.querySelector(
+  ".modal__close-button"
+);
 
 // Functions
 function openPopup(popup) {
@@ -60,9 +67,9 @@ function closePopup(popup) {
   popup.classList.remove("modal_opened");
 }
 
-function renderCard(cardData) {
+function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
-  cardContentEl.prepend(cardElement);
+  wrapper.prepend(cardElement);
 }
 
 function handleProfileEditSubmit(e) {
@@ -74,32 +81,58 @@ function handleProfileEditSubmit(e) {
 
 function handleAddCardSubmit(e) {
   e.preventDefault();
-  const name = AddCardTitleInput.value;
-  const link = AddCardLinkInput.value;
+  const name = addCardTitleInput.value;
+  const link = addCardLinkInput.value;
   renderCard({ name, link }, cardElement);
 
   closePopup(addCardModal);
 }
 
 function getCardElement(cardData) {
-  // clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
-  // access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".cards__image");
   const cardTitleEl = cardElement.querySelector(".cards__title");
-  // toggle like button
   const likeBtn = cardElement.querySelector(".cards__like-button");
+
+  // toggle button
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("cards__like-button_active");
   });
+
   // delete button
   const deleteBtn = cardElement.querySelector(".cards__delete-button");
+  deleteBtn.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
-  // const cards = document.querySelectorAll(".cards");
-  // cards.forEach((card) => {
-  //   const deleteBtn = document.createElement("span");
-  //   deleteBtn.innerHTML = '<svg class="cards__delete-button" ...></svg>';
+  // open image preview
+  cardImageEl.addEventListener("click", () => {
+    previewImage.src = cardData.link;
+    previewImage.alt = cardData.name;
+    previewTitle.textContent = cardData.name;
+    openPopup(previewImageModal);
+  });
+
+  previewModalCloseBtn.addEventListener("click", () =>
+    closePopup(previewImageModal)
+  );
+
+  // previewModalCloseButton.addEventListener("click", () =>
+  //   closePopup(previewImageModal)
+  // );
+
+  // const previewImage = document.querySelector(".cards__image-preview");
+
+  // cardImageEl.addEventListener("click", () => {
+  //   previewImageModal(cardData);
   // });
+
+  // function previewImageModal({ name, link }) {
+  //   cardTitleEl.textContent = name;
+  //   openPopup(previewImage);
+  //   cardImageEl.src = link;
+  //   cardImageEl.alt = name;
+  // }
 
   // set the path to the image to the link field of the object
   const cardImageSrc = cardData.link;

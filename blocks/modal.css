@@ -105,33 +105,35 @@
   max-height: 75vh;
 }
 
-.modal__container {
-  position: relative;
-  max-width: 282px;
-  max-height: 322px;
-  padding: 0 19px;
-}
+@media screen and (min-width: 320px) and (max-width: 560px) {
+  .modal__container {
+    position: relative;
+    max-width: 282px;
+    max-height: 322px;
+    padding: 0 19px;
+  }
 
-.modal__form {
-  padding: 25px 22px;
-}
+  .modal__form {
+    padding: 25px 22px;
+  }
 
-.modal__form-input {
-  min-width: 236px;
-  min-height: 35px;
-  padding: 0;
-  margin: 0 0 30px;
-}
+  .modal__form-input {
+    min-width: 236px;
+    min-height: 35px;
+    padding: 0;
+    margin: 0 0 30px;
+  }
 
-.modal__submit-button {
-  min-width: 236px;
-  margin-top: 48px;
-  padding: 0;
-  font-size: 14px;
-  line-height: 16px;
-}
+  .modal__submit-button {
+    min-width: 236px;
+    margin-top: 48px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 16px;
+  }
 
-.modal__form-header {
-  font-size: 18px;
-  line-height: 22px;
+  .modal__form-header {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

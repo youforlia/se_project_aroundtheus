@@ -26,11 +26,13 @@ const initialCards = [
 ];
 
 // Wrappers
-const cardElement = document.querySelector(".cards");
+const cardSection = document.querySelector(".cards");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
+
+document.querySelector(".cards"); //
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
@@ -83,8 +85,9 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardElement);
-
+  renderCard({ name, link }, cardSection);
+  addCardTitleInput.value = addCardTitleInput.defaultValue;
+  addCardLinkInput.value = addCardLinkInput.defaultValue;
   closePopup(addCardModal);
 }
 
@@ -113,27 +116,6 @@ function getCardElement(cardData) {
     openPopup(previewImageModal);
   });
 
-  previewModalCloseBtn.addEventListener("click", () =>
-    closePopup(previewImageModal)
-  );
-
-  // previewModalCloseButton.addEventListener("click", () =>
-  //   closePopup(previewImageModal)
-  // );
-
-  // const previewImage = document.querySelector(".cards__image-preview");
-
-  // cardImageEl.addEventListener("click", () => {
-  //   previewImageModal(cardData);
-  // });
-
-  // function previewImageModal({ name, link }) {
-  //   cardTitleEl.textContent = name;
-  //   openPopup(previewImage);
-  //   cardImageEl.src = link;
-  //   cardImageEl.alt = name;
-  // }
-
   // set the path to the image to the link field of the object
   const cardImageSrc = cardData.link;
   cardImageEl.setAttribute("src", cardImageSrc);
@@ -161,4 +143,8 @@ addCardCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((cardData) => renderCard(cardData, cardElement));
+initialCards.forEach((cardData) => renderCard(cardData, cardSection));
+
+previewModalCloseBtn.addEventListener("click", () =>
+  closePopup(previewImageModal)
+);

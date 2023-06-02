@@ -63,7 +63,6 @@
 
 .modal__form-input:last-of-type {
   margin-top: 20px;
-  
 }
 
 .modal__submit-button {
@@ -185,3 +184,4 @@
     top: -45px;
     right: -35px;
   }
+}

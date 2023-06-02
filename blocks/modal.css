@@ -109,7 +109,7 @@
   opacity: 0.6;
 }
 
-.modal__form-input:invalid {
+.modal__input_type_error {
   border-bottom: 1px solid #ff0000; /* the red border is for invalid input */
 }
 

@@ -1,3 +1,8 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
+console.log(FormValidator);
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +29,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+const card = new Card(cardData, "#card-template");
+card.getView();
 
 // Wrappers
 const cardSection = document.querySelector(".cards");

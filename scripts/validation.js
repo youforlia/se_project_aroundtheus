@@ -15,6 +15,7 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEl) => inputEl.validity.valid);
 }
+
 // disableSubmitButton function
 const disableSubmitButton = (submitButton, inactiveButtonClass) => {
   submitButton.classList.add(inactiveButtonClass);

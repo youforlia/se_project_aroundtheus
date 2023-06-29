@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+// import config from "../utils/utils.js";
 
 console.log(FormValidator);
 
@@ -42,8 +43,8 @@ card.getView();
 const cardSection = document.querySelector(".cards");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardForm = addCardModal.querySelector(".modal__form");
+const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
+const addCardForm = addCardModal.querySelector("#add-card-form");
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
@@ -135,15 +136,15 @@ function getCardElement(cardData) {
   const likeBtn = cardElement.querySelector(".cards__like-button");
 
   // toggle button
-  likeBtn.addEventListener("click", () => {
-    likeBtn.classList.toggle("cards__like-button_active");
-  });
+  // likeBtn.addEventListener("click", () => {
+  //   likeBtn.classList.toggle("cards__like-button_active");
+  // });
 
   // delete button
-  const deleteBtn = cardElement.querySelector(".cards__delete-button");
-  deleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
+  // const deleteBtn = cardElement.querySelector(".cards__delete-button");
+  // deleteBtn.addEventListener("click", () => {
+  //   cardElement.remove();
+  // });
 
   // open image preview
   cardImageEl.addEventListener("click", () => {

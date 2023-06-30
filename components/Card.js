@@ -11,7 +11,7 @@ export default class Card {
     this._cardElement
       .querySelector(".cards__like-button")
       .addEventListener("click", () => {
-        this.handleLikeIcon();
+        this._handleLikeIcon();
       });
 
     //card delete button
@@ -40,15 +40,13 @@ export default class Card {
       .content.querySelector(".cards__content")
       .cloneNode(true);
 
-    // this._setEventListeners();
+    this._cardImageEl = this._cardElement.querySelector(".cards__image");
+    this._cardTitleEl = this._cardElement.querySelector(".cards__title");
+    this._cardImageEl.src = this._link;
+    this._cardImageEl.alt = this._name;
+    this._setEventListeners();
+    this._cardTitleEl.textContent = this._name;
 
-    // this._cardImageEl = this._cardElement.querySelector(".card__image");
-    // this._cardTitleEl = this._cardElement.querySelector(".card__title");
-    // this._cardImageSrc.src = this._link;
-    // this._cardImageEl.alt = this._name;
-    // this._setEventListeners();
-    // this._cardTitleEl.textContent = this._name;
-
-    // return this._cardElement;
+    return this._cardElement;
   }
 }

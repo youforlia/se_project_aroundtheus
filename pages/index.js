@@ -2,8 +2,6 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 // import config from "../utils/utils.js";
 
-console.log(FormValidator);
-
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -186,3 +184,19 @@ initialCards.forEach((cardData) => renderCard(cardData, cardSection));
 previewModalCloseBtn.addEventListener("click", () =>
   closePopup(previewImageModal)
 );
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+// Form Validator
+const profileFormValidator = new FormValidator(config, profileEditForm);
+profileFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(config, addCardForm);
+cardFormValidator.enableValidation();

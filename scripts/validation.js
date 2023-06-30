@@ -16,17 +16,17 @@
 //   return !inputList.every((inputEl) => inputEl.validity.valid);
 // }
 
-// disableSubmitButton function
-const disableSubmitButton = (submitButton, inactiveButtonClass) => {
-  submitButton.classList.add(inactiveButtonClass);
-  submitButton.disabled = true;
-};
+// // disableSubmitButton function
+// const disableSubmitButton = (submitButton, inactiveButtonClass) => {
+//   submitButton.classList.add(inactiveButtonClass);
+//   submitButton.disabled = true;
+// };
 
-// enableSubmitButton function
-const enableSubmitButton = (submitButton, inactiveButtonClass) => {
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;
-};
+// // enableSubmitButton function
+// const enableSubmitButton = (submitButton, inactiveButtonClass) => {
+//   submitButton.classList.remove(inactiveButtonClass);
+//   submitButton.disabled = false;
+// };
 
 // function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 //   if (hasInvalidInput(inputEls)) {

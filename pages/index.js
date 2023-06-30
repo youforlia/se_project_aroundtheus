@@ -102,13 +102,15 @@ function handleAddCardSubmit(e) {
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
   renderCard({ name, link }, cardSection);
+
   closePopup(addCardModal);
   addCardForm.reset();
-  toggleButtonState(
-    [addCardTitleInput, addCardLinkInput],
-    addCardSubmitBtn,
-    config
-  );
+  cardFormValidator.toggleButtonState();
+  // toggleButtonState(
+  //   [addCardTitleInput, addCardLinkInput],
+  //   addCardSubmitBtn,
+  //   config
+  // );
 }
 
 // close modal by escape

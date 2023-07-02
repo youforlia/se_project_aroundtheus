@@ -1,3 +1,10 @@
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImage = previewImageModal.querySelector(".modal__preview-image");
+const previewTitle = previewImageModal.querySelector(".modal__preview-title");
+const previewModalCloseBtn = previewImageModal.querySelector(
+  ".modal__close-button"
+);
+
 function openPopup(popup) {
   popup.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscBtn);
@@ -26,4 +33,5 @@ function handleOverlayClose(e) {
   }
 }
 
-export { openPopup, closePopup, handleEscBtn, handleOverlayClose };
+export { openPopup, closePopup };
+export { previewImageModal, previewImage, previewTitle, previewModalCloseBtn };

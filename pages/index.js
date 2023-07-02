@@ -1,11 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import {
-  openPopup,
-  closePopup,
-  handleEscBtn,
-  handleOverlayClose,
-} from "../utils/utils.js";
+import { openPopup, closePopup } from "../utils/utils.js";
+import { previewModalCloseBtn, previewImageModal } from "../utils/utils.js";
 
 const initialCards = [
   {
@@ -34,7 +30,7 @@ const initialCards = [
   },
 ];
 
-// const cardData = {
+// export const cardData = {
 //   name: "Yosemite Valley",
 //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 // };
@@ -67,12 +63,12 @@ const addCardCloseBtn = addCardModal.querySelector(".modal__close-button");
 const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardLinkInput = document.querySelector("#add-card-link-input");
 
-const previewImageModal = document.querySelector("#preview-image-modal");
-const previewImage = previewImageModal.querySelector(".modal__preview-image");
-const previewTitle = previewImageModal.querySelector(".modal__preview-title");
-const previewModalCloseBtn = previewImageModal.querySelector(
-  ".modal__close-button"
-);
+// const previewImageModal = document.querySelector("#preview-image-modal");
+// const previewImage = previewImageModal.querySelector(".modal__preview-image");
+// const previewTitle = previewImageModal.querySelector(".modal__preview-title");
+// const previewModalCloseBtn = previewImageModal.querySelector(
+//   ".modal__close-button"
+// );
 
 // Functions
 // function openPopup(popup) {
@@ -87,7 +83,7 @@ const previewModalCloseBtn = previewImageModal.querySelector(
 //   document.removeEventListener("click", handleOverlayClose);
 // }
 
-function renderCard(cardData, wrapper) {
+export function renderCard(cardData, wrapper) {
   const card = new Card(cardData, "#card-template");
   const cardEl = card.getView();
 
@@ -152,12 +148,12 @@ function getCardElement(cardData) {
   // });
 
   // open image preview
-  cardImageEl.addEventListener("click", () => {
-    previewImage.src = cardData.link;
-    previewImage.alt = cardData.name;
-    previewTitle.textContent = cardData.name;
-    openPopup(previewImageModal);
-  });
+  // cardImageEl.addEventListener("click", () => {
+  //   previewImage.src = cardData.link;
+  //   previewImage.alt = cardData.name;
+  //   previewTitle.textContent = cardData.name;
+  //   openPopup(previewImageModal);
+  // });
 
   // set the path to the image to the link field of the object
   const cardImageSrc = cardData.link;

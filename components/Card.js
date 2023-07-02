@@ -1,3 +1,11 @@
+import {
+  previewImage,
+  previewTitle,
+  previewImageModal,
+} from "../utils/utils.js";
+
+import { openPopup, closePopup } from "../utils/utils.js";
+
 export default class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
@@ -20,6 +28,11 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleDeleteIcon();
       });
+
+    //open image preview
+    this._cardImageEl.addEventListener("click", () => {
+      this._handleImagePreview();
+    });
   }
 
   //EVENT HANDLERS
@@ -32,6 +45,13 @@ export default class Card {
 
   _handleDeleteIcon() {
     this._cardElement.remove();
+  }
+
+  _handleImagePreview() {
+    previewImage.src = this._link;
+    previewImage.alt = this._name;
+    previewTitle.textContent = this._name;
+    openPopup(previewImageModal);
   }
 
   getView() {

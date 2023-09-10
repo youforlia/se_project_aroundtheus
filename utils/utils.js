@@ -17,21 +17,21 @@ function closePopup(popup) {
   document.removeEventListener("click", handleOverlayClose);
 }
 
-// close modal by escape
-function handleEscBtn(e) {
-  const key = e.key;
-  if (key === "Escape") {
-    const openedPopup = document.querySelector(".modal_opened");
-    closePopup(openedPopup);
-  }
-}
+// // close modal by escape
+// function handleEscBtn(e) {
+//   const key = e.key;
+//   if (key === "Escape") {
+//     const openedPopup = document.querySelector(".modal_opened");
+//     closePopup(openedPopup);
+//   }
+// }
 
-// close modal thru overlay click
-function handleOverlayClose(e) {
-  if (e.target.classList.contains("modal_opened")) {
-    closePopup(e.target);
-  }
-}
+// // close modal thru overlay click
+// function handleOverlayClose(e) {
+//   if (e.target.classList.contains("modal_opened")) {
+//     closePopup(e.target);
+//   }
+// }
 
 export { openPopup, closePopup };
 export { previewImageModal, previewImage, previewTitle, previewModalCloseBtn };

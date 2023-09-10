@@ -4,18 +4,35 @@ export default class Popup {
   }
 
   open() {
-    //open popup
+    this._popupElement.classList.add("modal_opened");
+    document.addEventListener("keydown", this._handleEscBtn);
+    document.addEventListener("click", this._handleOverlayClose);
   }
 
   close() {
-    //close popup
+    this._popupElement.classList.remove(".modal__opened");
+    document.removeEventListener("keydown", this._handleEscBtn);
+    document.removeEventListener("click", this._handleOverlayClose);
   }
 
-  _handleEscClose() {
-    //listens for esc btn
+  _handleEscClose(e) {
+    const key = e.key;
+    if (key === "Escape") {
+      const openedPopup = document.querySelector(".modal_opened");
+      closePopup(openedPopup);
+    }
   }
 
   setEventListeners() {
-    //sets events listeners
+    this._popupElement.addEventListener(
+      "keydown",
+      (e) =>
+        // if (
+        e.target.classList.contains("modal__close") ||
+        e.target.classList.contains("modal__opened")
+    );
+    {
+      this.close();
+    }
   }
 }

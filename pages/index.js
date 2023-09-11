@@ -2,14 +2,14 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 // import { openPopup, closePopup } from "../utils/utils.js";
-import { previewModalCloseBtn, previewImageModal } from "../utils/utils.js";
+import { previewModalCloseBtn } from "../utils/utils.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards } from "../utils/constants.js";
 
 // Wrappers
-const cardSection = document.querySelector(".cards");
+// const cardSection = document.querySelector(".cards");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -34,6 +34,10 @@ const cardSection = new Section({
   renderer: renderCard,
 });
 
+cardSection.renderItems();
+
+//call render items method here
+
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
 const profileCloseBtn = profileEditModal.querySelector(".modal__close-button");
@@ -55,12 +59,16 @@ const addCardCloseBtn = addCardModal.querySelector(".modal__close-button");
 const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardLinkInput = document.querySelector("#add-card-link-input");
 
-export function renderCard(cardData, wrapper) {
+export function renderCard(cardData) {
   const card = new Card(cardData, "#card-template");
   const cardEl = card.getView();
 
+  //add items here
+  addItem(item);
+  this._containerSelector.prepend(item);
+
   // const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardEl);
+  //   wrapper.prepend(cardEl);
 }
 
 function handleProfileEditSubmit(e) {
@@ -74,7 +82,7 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardLinkInput.value;
-  renderCard({ name, link }, cardSection);
+  renderCard({ name, link });
 
   closePopup(addCardModal);
   addCardForm.reset();
@@ -114,7 +122,7 @@ addCardCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((cardData) => renderCard(cardData, cardSection));
+initialCards.forEach((cardData) => renderCard(cardData));
 
 previewModalCloseBtn.addEventListener("click", () =>
   closePopup(previewImageModal)

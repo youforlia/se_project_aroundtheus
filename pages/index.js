@@ -79,9 +79,9 @@ export function renderCard(cardData) {
   //   wrapper.prepend(cardEl);
 }
 
-function handleProfileEditSubmit() {
+function handleProfileEditSubmit(values) {
   // e.preventDefault();
-  userInfo.setUserInfo();
+  userInfo.setUserInfo(values);
   // profileTitle.textContent = profileTitleInput.value;
   // profileDescription.textContent = profileDescriptionInput.value;
   editProfilePopup.close();
@@ -135,9 +135,9 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 initialCards.forEach((cardData) => renderCard(cardData));
 
-previewModalCloseBtn.addEventListener("click", () =>
-  closePopup(previewImageModal)
-);
+// previewModalCloseBtn.addEventListener("click", () =>
+//   closePopup(previewImageModal)
+// );
 
 const config = {
   formSelector: ".modal__form",

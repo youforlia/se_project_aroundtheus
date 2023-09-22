@@ -1,15 +1,16 @@
-import {
-  previewImage,
-  previewTitle,
-  previewImageModal,
-} from "../utils/utils.js";
+// import {
+//   previewImage,
+//   previewTitle,
+//   previewImageModal,
+// } from "../utils/utils.js";
 
 import { openPopup, closePopup } from "../utils/utils.js";
 
 export default class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link, handleImagePreview }, cardSelector) {
     this._name = name;
     this._link = link;
+    this._handleImagePreview = handleImagePreview;
     this._cardSelector = cardSelector;
   }
 
@@ -30,9 +31,9 @@ export default class Card {
       });
 
     //open image preview
-    this._cardImageEl.addEventListener("click", () => {
-      this._handleImagePreview();
-    });
+    this._cardImageEl.addEventListener("click", () =>
+      this._handleImagePreview({ link: this._link, text: this._name })
+    );
   }
 
   //EVENT HANDLERS
@@ -47,12 +48,12 @@ export default class Card {
     this._cardElement.remove();
   }
 
-  _handleImagePreview() {
-    previewImage.src = this._link;
-    previewImage.alt = this._name;
-    previewTitle.textContent = this._name;
-    openPopup(previewImageModal);
-  }
+  // _handleImagePreview() {
+  //   previewImage.src = this._link;
+  //   previewImage.alt = this._name;
+  //   previewTitle.textContent = this._name;
+  //   openPopup();
+  // }
 
   getView() {
     this._cardElement = document

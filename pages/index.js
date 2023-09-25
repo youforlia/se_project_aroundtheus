@@ -2,7 +2,7 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 // import { openPopup, closePopup } from "../utils/utils.js";
-import { previewModalCloseBtn } from "../utils/utils.js";
+// import { previewModalCloseBtn } from "../utils/utils.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
@@ -68,7 +68,7 @@ const addCardTitleInput = document.querySelector("#add-card-title-input");
 const addCardLinkInput = document.querySelector("#add-card-link-input");
 
 export function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template");
+  const card = new Card(cardData, "#card-template", handleCardClick);
   const cardEl = card.getView();
 
   //add items here
@@ -87,33 +87,39 @@ function handleProfileEditSubmit(values) {
   editProfilePopup.close();
 }
 
-function handleAddCardSubmit() {
+function handleAddCardSubmit(values) {
   // e.preventDefault();
-  const name = addCardTitleInput.value;
-  const link = addCardLinkInput.value;
-  const cardEl = getCardElement({ name, link });
-  cardSection.addItem(cardEl);
+  const name = values.title;
+  const link = values.link;
+  // const cardEl = getCardElement({ name, link });
+  // cardSection.addItem(cardEl);
+  const card = renderCard({ name, link });
+  // cardSection.addItem(card);
   addCardPopup.close();
   // addCardForm.reset();
   // cardFormValidator.toggleButtonState();
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".cards__image");
-  const cardTitleEl = cardElement.querySelector(".cards__title");
-  const likeBtn = cardElement.querySelector(".cards__like-button");
-
-  // set the path to the image to the link field of the object
-  const cardImageSrc = cardData.link;
-  cardImageEl.setAttribute("src", cardImageSrc);
-  // cardImageEl.setAttribute("alt", myObject.name);
-  cardImageEl.setAttribute("alt", cardData.name);
-  // set the card title to the name field of the object, too
-  cardTitleEl.textContent = cardData.name;
-  // return the ready HTML element with the filled-in data
-  return cardElement;
+function handleCardClick(name, link) {
+  previewImageModal.open(name, link);
 }
+
+// function getCardElement(cardData) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImageEl = cardElement.querySelector(".cards__image");
+//   const cardTitleEl = cardElement.querySelector(".cards__title");
+//   const likeBtn = cardElement.querySelector(".cards__like-button");
+
+//   // set the path to the image to the link field of the object
+//   const cardImageSrc = cardData.link;
+//   cardImageEl.setAttribute("src", cardImageSrc);
+//   // cardImageEl.setAttribute("alt", myObject.name);
+//   cardImageEl.setAttribute("alt", cardData.name);
+//   // set the card title to the name field of the object, too
+//   cardTitleEl.textContent = cardData.name;
+//   // return the ready HTML element with the filled-in data
+//   return cardElement;
+// }
 
 // Edit Modal Listeners
 profileEditBtn.addEventListener("click", () => {
@@ -123,15 +129,15 @@ profileEditBtn.addEventListener("click", () => {
   profileFormValidator.enableValidation();
   editProfilePopup.open();
 });
-profileCloseBtn.addEventListener("click", () => editProfilePopup.close());
+// profileCloseBtn.addEventListener("click", () => editProfilePopup.close());
 
 // Add Card Modal Listeners
 addCardBtn.addEventListener("click", () => addCardPopup.open(addCardModal));
 // addCardCloseBtn.addEventListener("click", () => closePopup(addCardModal));
 
 // Form Submit Listeners
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardForm.addEventListener("submit", handleAddCardSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 initialCards.forEach((cardData) => renderCard(cardData));
 

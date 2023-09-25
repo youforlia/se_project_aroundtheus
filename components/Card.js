@@ -1,16 +1,8 @@
-// import {
-//   previewImage,
-//   previewTitle,
-//   previewImageModal,
-// } from "../utils/utils.js";
-
-import { openPopup, closePopup } from "../utils/utils.js";
-
 export default class Card {
-  constructor({ name, link, handleImagePreview }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
-    this._handleImagePreview = handleImagePreview;
+    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
 
@@ -31,9 +23,9 @@ export default class Card {
       });
 
     //open image preview
-    this._cardImageEl.addEventListener("click", () =>
-      this._handleImagePreview({ link: this._link, text: this._name })
-    );
+    this._cardElement.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 
   //EVENT HANDLERS
@@ -41,19 +33,11 @@ export default class Card {
     this._cardElement
       .querySelector(".cards__like-button")
       .classList.toggle("cards__like-button_active");
-    // console.log(this._cardElement);
   }
 
   _handleDeleteIcon() {
     this._cardElement.remove();
   }
-
-  // _handleImagePreview() {
-  //   previewImage.src = this._link;
-  //   previewImage.alt = this._name;
-  //   previewTitle.textContent = this._name;
-  //   openPopup();
-  // }
 
   getView() {
     this._cardElement = document
@@ -61,13 +45,10 @@ export default class Card {
       .content.querySelector(".cards__content")
       .cloneNode(true);
 
-    this._cardImageEl = this._cardElement.querySelector(".cards__image");
-    this._cardTitleEl = this._cardElement.querySelector(".cards__title");
-    this._cardImageEl.src = this._link;
-    this._cardImageEl.alt = this._name;
+    this._cardElement.querySelector(".cards__image").src = this._link;
+    this._cardElement.querySelector(".cards__title").innerText = this._name;
+    this._cardElement.querySelector(".cards__image").alt = this._name;
     this._setEventListeners();
-    this._cardTitleEl.textContent = this._name;
-
     return this._cardElement;
   }
 }

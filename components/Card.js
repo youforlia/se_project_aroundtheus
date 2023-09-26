@@ -23,9 +23,11 @@ export default class Card {
       });
 
     //open image preview
-    this._cardElement.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+    this._cardElement
+      .querySelector(".cards__image")
+      .addEventListener("click", () => {
+        this._handleCardClick(this._name, this._link);
+      });
   }
 
   //EVENT HANDLERS

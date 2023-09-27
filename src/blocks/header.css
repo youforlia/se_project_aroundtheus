@@ -24,8 +24,6 @@
   }
 }
 
-m
-  .header::after {
-    margin: 32px 0 10px;
-  }
+m .header::after {
+  margin: 32px 0 10px;
 }

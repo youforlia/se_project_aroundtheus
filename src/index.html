@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.</title>
-    <link href="./pages/index.css" rel="stylesheet" />
     <link rel="icon" href="./favicon.ico" />
   </head>
   <body class="page">
@@ -13,7 +12,7 @@
       <!-- Header Section-->
       <header class="header page__section">
         <img
-          src="./images/around-the-us-logo.svg"
+          src="<%=require('./images/around-the-us-logo.svg')%>"
           alt="Around The U.S. Logo"
           class="header__logo"
         />
@@ -22,7 +21,7 @@
         <!-- Profile Section -->
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="avatar"
             class="profile__image"
           />
@@ -170,8 +169,8 @@
         </div>
       </template>
     </div>
-    <script src="./components/FormValidator.js" type="module"></script>
-    <script src="./pages/index.js" type="module"></script>
-    <script src="./utils/utils.js" type="module"></script>
+    <!-- <script src="./components/FormValidator.js" type="module"></script> -->
+    <!-- <script src="./pages/index.js" type="module"></script> -->
+    <!-- <script src="./utils/utils.js" type="module"></script> -->
   </body>
 </html>

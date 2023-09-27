@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards } from "../utils/constants.js";
+import "./index.css";
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");

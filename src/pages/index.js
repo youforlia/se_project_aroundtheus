@@ -34,7 +34,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      cardSection.addItem(card);
+      cardSection.addItem(cardData);
     },
   },
   "#cards__list"
@@ -68,7 +68,10 @@ function handleProfileEditSubmit(values) {
 function handleAddCardSubmit(values) {
   const name = values.title;
   const link = values.link;
-  const card = renderCard({ name, link });
+  {
+    return renderCard({ name, link });
+  }
+
   addCardPopup.close();
 }
 
@@ -81,12 +84,15 @@ profileEditBtn.addEventListener("click", () => {
   const user = userInfo.getUserInfo();
   profileTitleInput.value = user.name;
   profileDescriptionInput.value = user.job;
-  profileFormValidator.enableValidation();
+  profileFormValidator.resetValidation();
   editProfilePopup.open();
 });
 
 // Add Card Modal Listeners
-addCardBtn.addEventListener("click", () => addCardPopup.open(addCardModal));
+addCardBtn.addEventListener("click", () => {
+  cardFormValidator.resetValidation();
+  addCardPopup.open();
+});
 
 initialCards.forEach((cardData) => renderCard(cardData));
 

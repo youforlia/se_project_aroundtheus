@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards } from "../utils/constants.js";
+import { initialCards, config } from "../utils/constants.js";
 import "./index.css";
 
 // Wrappers
@@ -33,12 +33,11 @@ previewImageModal.setEventListeners();
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (cardData) => {
-      cardSection.addItem(cardData);
-    },
+    renderer: renderCard,
   },
   "#cards__list"
 );
+cardSection.renderItems();
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
@@ -71,8 +70,6 @@ function handleAddCardSubmit(values) {
   {
     return renderCard({ name, link });
   }
-
-  addCardPopup.close();
 }
 
 function handleCardClick(name, link) {
@@ -93,17 +90,6 @@ addCardBtn.addEventListener("click", () => {
   cardFormValidator.resetValidation();
   addCardPopup.open();
 });
-
-initialCards.forEach((cardData) => renderCard(cardData));
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 // Form Validator
 const profileFormValidator = new FormValidator(config, profileEditForm);

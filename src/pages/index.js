@@ -10,7 +10,7 @@ import "./index.css";
 //Request
 fetch("https://around-api.en.tripleten-services.com/v1", {
   headers: {
-    authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3",
+    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
   },
 })
   .then((res) => res.json())

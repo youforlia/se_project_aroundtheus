@@ -8,7 +8,7 @@ import { initialCards, config } from "../utils/constants.js";
 import "./index.css";
 
 //Request
-fetch("https://jsonplaceholder.typicode.com/posts", {
+fetch("https://around-api.en.tripleten-services.com/v1", {
   headers: {
     authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3",
   },
@@ -17,16 +17,6 @@ fetch("https://jsonplaceholder.typicode.com/posts", {
   .then((result) => {
     console.log(result);
   });
-
-//   fetch("https://around-api.en.tripleten-services.com/v1", {
-//   headers: {
-//     authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3"
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");

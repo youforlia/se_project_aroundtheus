@@ -7,7 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import { initialCards, config } from "../utils/constants.js";
 import "./index.css";
 
-//Request
+//Fetch Request
 fetch("https://around-api.en.tripleten-services.com/v1", {
   headers: {
     authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3",
@@ -17,6 +17,27 @@ fetch("https://around-api.en.tripleten-services.com/v1", {
   .then((result) => {
     console.log(result);
   });
+
+//API Class
+class Api {
+  constructor(options) {
+    // constructor body
+  }
+
+  getInitialCards() {
+    // ...
+  }
+
+  // other methods for working with the API
+}
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3",
+    "Content-Type": "application/json",
+  },
+});
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");

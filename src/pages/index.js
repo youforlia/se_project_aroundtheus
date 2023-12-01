@@ -15,7 +15,7 @@ fetch("https://around-api.en.tripleten-services.com/v1", {
 })
   .then((res) => res.json())
   .then((result) => {
-    console.log(result);
+    console.log(results);
   });
 
 //API Class

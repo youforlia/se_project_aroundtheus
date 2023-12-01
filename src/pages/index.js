@@ -25,7 +25,17 @@ class Api {
   }
 
   getInitialCards() {
-    // ...
+    return fetch("https://around-api.en.tripleten-services.com/v1", {
+      headers: {
+        authorization: "3191c1cf-0e90-4c5b-8aa5-5c25452aabe3",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   // other methods for working with the API

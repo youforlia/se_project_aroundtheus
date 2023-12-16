@@ -185,3 +185,9 @@
     right: -35px;
   }
 }
+
+.modal__confirm-container {
+  position: relative;
+  max-width: 430px;
+  max-height: 181px;
+}

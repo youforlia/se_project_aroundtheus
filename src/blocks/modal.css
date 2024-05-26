@@ -26,7 +26,7 @@
 }
 
 .modal__form {
-  background: #ffffff;
+  background: #fff;
   box-sizing: border-box;
   padding: 36px;
   font-family: "Inter", sans-serif;
@@ -162,12 +162,12 @@
     line-height: 16px;
   }
 
-  .modal__form-header {
+  /* .modal__form-header {
     font-size: 18px;
     line-height: 22px;
-  }
+  } */
 
-  .modal__close-button {
+  /* .modal__close-button {
     background: transparent url(../images/close-icon.svg) center no-repeat;
     width: 40px;
     height: 40px;
@@ -183,11 +183,46 @@
     position: absolute;
     top: -45px;
     right: -35px;
-  }
+  } */
 }
 
+/*Confirm Delete Modal*/
 .modal__confirm-container {
   position: relative;
   max-width: 430px;
   max-height: 181px;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 36px;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+.modal__confirm-delete-header {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__confirm-delete-button {
+  min-width: 117px;
+  min-height: 50px;
+  background: #000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 18px;
+  border: none;
+  margin-top: 30px;
+  padding: 13px 149px;
+}
+
+.modal__confirm-delete-button:hover {
+  background: rgba(0, 0, 0, 0.8);
 }

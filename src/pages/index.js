@@ -7,75 +7,9 @@ import UserInfo from "../components/UserInfo.js";
 import { initialCards, config } from "../utils/constants.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
-// import Api from "./Api.js";
+import Api from "./Api.js";
 
-//Fetch Request
-fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-  headers: {
-    authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-  },
-});
-//thens
-
-fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
-  method: "PATCH",
-  headers: {
-    authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    name: "Marie Skłodowska Curie",
-    about: "Physicist and Chemist",
-  }),
-});
-
-fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-  headers: {
-    authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-fetch("https://around-api.en.tripleten-services.com/v1/cards ", {
-  method: "POST",
-  headers: {
-    authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-    "Content-type": "application/json",
-  },
-  body: JSON.stringify({
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  }),
-});
-
-// API Class
-class Api {
-  constructor(options) {
-    // constructor body
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
-  }
-
-  getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
-  }
-
-  // other methods for working with the API
-}
-
+//APIs
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1/",
   headers: {
@@ -84,15 +18,13 @@ const api = new Api({
   },
 });
 
-export default Api;
-
 api
   .getInitialCards()
-  .then((result) => {
-    console.log(result);
+  .then((cards) => {
+    renderCard(cards);
   })
-  .catch((err) => {
-    console.error(err); // log the error to the console
+  .catch((error) => {
+    console.error(error);
   });
 
 // Wrappers
@@ -140,7 +72,12 @@ const profileDescriptionInput = document.querySelector(
 const addCardBtn = document.querySelector(".profile__add-button");
 
 export function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardClick);
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleCardClick,
+    handleDeleteCard
+  );
   const cardEl = card.getView();
 
   //add items here
@@ -164,10 +101,9 @@ function handleCardClick(name, link) {
   previewImageModal.open(name, link);
 }
 
-//recheck
-// function handleDeleteCard(card) {
-//   confirmModal.open();
-// }
+function handleDeleteCard(card) {
+  confirmModal.open();
+}
 
 // Edit Modal Listeners
 profileEditBtn.addEventListener("click", () => {

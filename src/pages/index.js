@@ -21,7 +21,7 @@ const api = new Api({
 api
   .getInitialCards()
   .then((cards) => {
-    renderCard(cards);
+    cards.forEach((card) => renderCard(card));
   })
   .catch((error) => {
     console.error(error);
@@ -129,7 +129,7 @@ cardFormValidator.enableValidation();
 
 // Delete Confirmation
 // instantiate PopupWithConfirmation
-const confirmModal = new PopupWithConfirmation("#confirm-modal");
+const confirmModal = new PopupWithConfirmation("#confirm-delete-modal");
 confirmModal.setEventListeners();
 
 //

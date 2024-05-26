@@ -27,7 +27,6 @@ export default class Popup {
         e.target.classList.contains("modal__close-button") ||
         e.target.classList.contains("modal_opened")
       ) {
-        console.log("exit button clicked");
         this.close();
       }
     });

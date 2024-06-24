@@ -44,6 +44,7 @@ export default class Api {
 
   deleteCard() {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+      method: "DELETE",
       headers: {
         authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
       },

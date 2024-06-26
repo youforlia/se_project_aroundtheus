@@ -103,6 +103,18 @@ function handleCardClick(name, link) {
 
 function handleDeleteCard(card) {
   confirmModal.open();
+  console.log(card)
+
+  confirmModal.setSubmitAction(() => {
+    api.deleteCard(card.id)
+    .then(() => {
+      card.deleteCard();
+      confirmModal.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  })
 }
 
 // Edit Modal Listeners

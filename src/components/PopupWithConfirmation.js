@@ -1,28 +1,23 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-  constructor(popupSelector, deleteConfirmationHandler) {
+  constructor(popupSelector) {
     super({ popupSelector });
-    this._deleteConfirmationHandler = deleteConfirmationHandler;
-    this._confirmDeleteBtnEl = this._popupElement.querySelector(
-      ".modal__confirm-delete-button"
-    );
-
-    this._cardElement = null;
-
-    // this._cardElement = cardElement;
+    this._popupForm = this._popupElement.querySelector(".modal__confirm-container");
+    this._deleteBtn = this._popupElement.querySelector(".modal__confirm-delete-button");  
   }
 
-  _deleteConfirmationHandler() {
-    this._cardElement.remove();
-    console.log("Attempting to delete:", this._cardElement);
+  setSubmitAction(callbackFn) {
+    this._deleteConfirmationHandler = callbackFn;
   }
 
   setEventListeners() {
-    this._cardElement.querySelector(".modal__confirm")
-    .addEventListener("click", () => {
+    super.setEventListeners();
+
+    this._popupForm.addEventListener("click", (e) => {
+      e.preventDefault();
       this._deleteConfirmationHandler();
     });
-    super.setEventListeners();
+    
   }
 }

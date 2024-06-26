@@ -42,12 +42,11 @@ export default class Api {
     return Promise.all([userInfoPromise, cardsPromise]);
   }
 
-  deleteCard() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+  // Delete Card
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}cards/${id}`, {
       method: "DELETE",
-      headers: {
-        authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-      },
+      headers: this._headers, 
     })
       .then((res) => {
         if (!res.ok) {

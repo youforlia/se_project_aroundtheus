@@ -38,10 +38,11 @@ export default class Card {
       .classList.toggle("cards__like-button_active");
   }
 
-  // _handleDeleteIcon() {
-  //   this._cardElement.remove();
-  // }
-
+  _handleDeleteCard() {
+    this._cardElement.remove();
+    this._element = null;
+  }
+  
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)

@@ -22,14 +22,14 @@ export default class Api {
   // FETCH INITIAL CARDS  
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, { 
-      headers: this._headers
+      headers: this._headers,
     });
   }
 
   // FETCH CURRENT USER INFO  
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
     });
   }
 
@@ -45,16 +45,6 @@ export default class Api {
     });
   }
 
-  // NOT SURE IF I NEED THIS
-  // // Function to fetch user info and cards together
-  // fetchData() {
-  //   const userInfoPromise = this.getUserInfo();
-  //   const cardsPromise = this.getInitialCards();
-
-  //   return Promise.all([userInfoPromise, cardsPromise]);
-  // }
-
-
   // ADD NEW CARD
   addNewCard(name, link) {
     return this._request(`${this._baseUrl}/cards`, {
@@ -63,7 +53,7 @@ export default class Api {
       body: JSON.stringify({
         name,
         link
-      })
+      }),
     });
   }
 
@@ -77,7 +67,7 @@ export default class Api {
 
   // LIKE CARD
   likeCard() {
-    return this._request(`${this._baseUrl}/cards/${id}`, {
+    return this._request(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
     });
@@ -85,7 +75,7 @@ export default class Api {
 
   // DISLIKE CARD
   dislikeCard() {
-    return this._request(`${this._baseUrl}/cards/${id}`, {
+    return this._request(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     });
@@ -98,7 +88,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         avatar: link
-      })
+      }),
     });
   }
 

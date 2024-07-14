@@ -28,14 +28,13 @@ export function renderCard(cardData) {
   const cardEl = card.getView();
   console.log("Rendered Card Element: ", cardEl); // Log to check element
   return cardEl;
-
-  //add items here
-  cardSection.addItem(cardEl);
 }
+
+let userInfo;
 
 api.loadPage()
   .then(([initialCards, userData]) => {
-    console.log("Initial Cards: ", initialCards);
+    console.log("Initial Cards Fetched: ", initialCards);
     if (!initialCards || !initialCards.length) {
       console.warn("No initial cards available.");
     }
@@ -55,9 +54,10 @@ api.loadPage()
     cardSection.renderItems();
 
     // Update user profile
-    const userInfo = new UserInfo({
+    userInfo = new UserInfo({
       nameSelector: ".profile__title",
-      jobSelector: ".profile__description"
+      jobSelector: ".profile__description",
+      imageSelector: ".profile__image"
     });
     userInfo.setUserInfo(userData);
   })
@@ -72,11 +72,6 @@ const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = addCardModal.querySelector("#add-card-form");
 
-const userInfo = new UserInfo({
-  nameSelector: ".profile__title",
-  jobSelector: ".profile__description",
-});
-
 const editProfilePopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -88,8 +83,6 @@ addCardPopup.setEventListeners();
 
 const previewImageModal = new PopupWithImage("#preview-image-modal");
 previewImageModal.setEventListeners();
-
-
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
@@ -104,8 +97,21 @@ const profileDescriptionInput = document.querySelector(
 const addCardBtn = document.querySelector(".profile__add-button");
 
 function handleProfileEditSubmit(values) {
-  userInfo.setUserInfo(values);
-  editProfilePopup.close();
+  // Get the new profile data from the form inputs
+  const name = profileTitleInput.value;
+  const about = profileDescriptionInput.value;
+
+   // Call the API to update user info
+   api.updateUserInfo(name, about)
+   .then((userData) => {
+     userInfo.setUserInfo(userData); // Update the UI with the new profile data
+     editProfilePopup.close();
+   })
+   .catch((error) => {
+     console.log(error);
+   });
+
+  // editProfilePopup.close();
 }
 
 function handleAddCardSubmit(values) {

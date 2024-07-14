@@ -1,77 +1,110 @@
 export default class Api {
-  constructor(options) {
+  constructor({ baseUrl, headers }) {
     // Constructor body
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
+
+  _request(url, options) {
+    return fetch(url, options)
+    .then(this._handleResponse);
+  }
+
+  _handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // if the server returns an error, reject the promise
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
+  // FETCH INITIAL CARDS  
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // if the server returns an error, reject the promise
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    return this._request(`${this._baseUrl}/cards`, { 
+      headers: this._headers
+    });
   }
 
+  // FETCH CURRENT USER INFO  
   getUserInfo() {
-    return fetch(`${this._baseUrl}/user`, {
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+    return this._request(`${this._baseUrl}/users/me`, {
+      headers: this._headers
     });
   }
 
-  // Function to fetch user info and cards together
-  fetchData() {
-    const userInfoPromise = this.getUserInfo();
-    const cardsPromise = this.getInitialCards();
-
-    return Promise.all([userInfoPromise, cardsPromise]);
+  // UPDATE USER INFO
+  updateUserInfo(name, about) {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about
+      })
+    });
   }
 
-  // Delete Card
+  // NOT SURE IF I NEED THIS
+  // // Function to fetch user info and cards together
+  // fetchData() {
+  //   const userInfoPromise = this.getUserInfo();
+  //   const cardsPromise = this.getInitialCards();
+
+  //   return Promise.all([userInfoPromise, cardsPromise]);
+  // }
+
+
+  // ADD NEW CARD
+  addNewCard(name, link) {
+    return this._request(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link
+      })
+    });
+  }
+
+  // DELETE CARD
   deleteCard(id) {
-    return fetch(`${this._baseUrl}cards/${id}`, {
+    return this._request(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers, 
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Problem");
-          return;
-        }
-        return res.json();
-        // return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  getCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      headers: this._headers
     });
   }
-}
+
+  // LIKE CARD
+  likeCard() {
+    return this._request(`${this._baseUrl}/cards/${id}`, {
+      method: "PUT",
+      headers: this._headers,
+    });
+  }
+
+  // DISLIKE CARD
+  dislikeCard() {
+    return this._request(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  }
+
+  // UPDATE AVATAR
+  updateAvatar(link) {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
+    });
+  }
+
+  //LOAD PAGE
+  loadPage() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+  }
+

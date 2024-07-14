@@ -11,21 +11,60 @@ import Api from "./Api.js";
 
 //APIs
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
     "Content-Type": "application/json",
   },
 });
 
-api
-  .getInitialCards()
-  .then((cards) => {
-    cards.forEach((card) => renderCard(card));
+export function renderCard(cardData) {
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleCardClick,
+    handleDeleteCard
+  );
+  const cardEl = card.getView();
+  console.log("Rendered Card Element: ", cardEl); // Log to check element
+  return cardEl;
+
+  //add items here
+  cardSection.addItem(cardEl);
+}
+
+api.loadPage()
+  .then(([initialCards, userData]) => {
+    console.log("Initial Cards: ", initialCards);
+    if (!initialCards || !initialCards.length) {
+      console.warn("No initial cards available.");
+    }
+
+    // Initialize and render the card section
+    const cardSection = new Section(
+      {
+        items: initialCards,
+        renderer: (cardData) => {
+          const cardElement = renderCard(cardData)
+          console.log("Card Element: ", cardElement); // Debug
+          cardSection.addItem(cardElement);
+        }
+      },
+      "#cards__list"
+    );
+    cardSection.renderItems();
+
+    // Update user profile
+    const userInfo = new UserInfo({
+      nameSelector: ".profile__title",
+      jobSelector: ".profile__description"
+    });
+    userInfo.setUserInfo(userData);
   })
   .catch((error) => {
-    console.error(error);
+    console.log(error);
   });
+
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -50,14 +89,7 @@ addCardPopup.setEventListeners();
 const previewImageModal = new PopupWithImage("#preview-image-modal");
 previewImageModal.setEventListeners();
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  "#cards__list"
-);
-cardSection.renderItems();
+
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
@@ -70,19 +102,6 @@ const profileDescriptionInput = document.querySelector(
 );
 
 const addCardBtn = document.querySelector(".profile__add-button");
-
-export function renderCard(cardData) {
-  const card = new Card(
-    cardData,
-    "#card-template",
-    handleCardClick,
-    handleDeleteCard
-  );
-  const cardEl = card.getView();
-
-  //add items here
-  cardSection.addItem(cardEl);
-}
 
 function handleProfileEditSubmit(values) {
   userInfo.setUserInfo(values);
@@ -103,7 +122,6 @@ function handleCardClick(name, link) {
 
 function handleDeleteCard(card) {
   confirmModal.open();
-  console.log(card)
 
   confirmModal.setSubmitAction(() => {
     api.deleteCard(card.id)
@@ -144,12 +162,3 @@ cardFormValidator.enableValidation();
 const confirmModal = new PopupWithConfirmation("#confirm-delete-modal");
 confirmModal.setEventListeners();
 
-//
-// const editProfilePopup = new PopupWithForm(
-//   "#profile-edit-modal",
-//   handleProfileEditSubmit
-// );
-// editProfilePopup.setEventListeners();
-
-// //const previewImageModal = new PopupWithImage("#preview-image-modal");
-// previewImageModal.setEventListeners();

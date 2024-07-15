@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, config } from "../utils/constants.js";
+import { config } from "../utils/constants.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 import Api from "./Api.js";
@@ -26,26 +26,22 @@ export function renderCard(cardData) {
     handleDeleteCard
   );
   const cardEl = card.getView();
-  console.log("Rendered Card Element: ", cardEl); // Log to check element
   return cardEl;
 }
 
 let userInfo;
+let cardSection;
 
 api.loadPage()
   .then(([initialCards, userData]) => {
-    console.log("Initial Cards Fetched: ", initialCards);
-    if (!initialCards || !initialCards.length) {
-      console.warn("No initial cards available.");
-    }
+    
 
     // Initialize and render the card section
-    const cardSection = new Section(
+    cardSection = new Section(
       {
         items: initialCards,
         renderer: (cardData) => {
           const cardElement = renderCard(cardData)
-          console.log("Card Element: ", cardElement); // Debug
           cardSection.addItem(cardElement);
         }
       },
@@ -111,15 +107,29 @@ function handleProfileEditSubmit(values) {
      console.log(error);
    });
 
-  // editProfilePopup.close();
 }
 
 function handleAddCardSubmit(values) {
   const name = values.title;
   const link = values.link;
-  {
-    return renderCard({ name, link });
-  }
+  
+  // Call API method to add a new card
+  api.addNewCard(name, link)
+    .then((newCard) => {
+      // Render the newly created card
+      const cardElement = renderCard(newCard);
+
+      // Ensure cardSection is accessible and addItem method is defined
+      if (cardSection && cardSection.addItem) {
+        cardSection.addItem(cardElement);
+        addCardPopup.close();
+      } else {
+        console.error('cardSection or addItem method is undefined.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error adding new card:', error);
+    });
 }
 
 function handleCardClick(name, link) {

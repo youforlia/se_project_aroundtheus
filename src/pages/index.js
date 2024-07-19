@@ -18,20 +18,25 @@ const api = new Api({
   },
 });
 
+export default api;
+
 export function renderCard(cardData) {
   const card = new Card(
     cardData,
     "#card-template",
     handleCardClick,
-    handleDeleteCard
+    handleDeleteCard,
+    handleLikeCard
   );
-  const cardEl = card.getView();
-  return cardEl;
+  // const cardEl = card.getView();
+  // return cardEl;
+  return card.getView();
 }
 
 let userInfo;
 let cardSection;
 
+// Load initial cards
 api.loadPage()
   .then(([initialCards, userData]) => {
     
@@ -61,6 +66,80 @@ api.loadPage()
     console.log(error);
   });
 
+// Add card function
+function handleAddCardSubmit(values) {
+  const name = values.title;
+  const link = values.link;
+  
+  // Call API method to add a new card
+  api.addNewCard(name, link)
+    .then((newCard) => {
+      // Render the newly created card
+      const cardElement = renderCard(newCard);
+
+      // Ensure cardSection is accessible and addItem method is defined
+      if (cardSection && cardSection.addItem) {
+        cardSection.addItem(cardElement);
+        addCardPopup.close();
+      } else {
+        console.error('cardSection or addItem method is undefined.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error adding new card:', error);
+    });
+}
+
+// Preview image
+function handleCardClick(name, link) {
+  previewImageModal.open(name, link);
+}
+
+// Delete card function
+function handleDeleteCard(card) {
+  confirmModal.open();
+
+  confirmModal.setSubmitAction(() => {
+    api.deleteCard(card.id)
+    .then(() => {
+      card.deleteCard();
+      confirmModal.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  })
+}
+
+// Like Card function
+function handleLikeCard(cardId, isLiked) {
+  return api.updateLikeStatus(cardId, isLiked)
+    .then((updatedCardData) => {
+      return updatedCardData; // Assuming the API returns the updated card data
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error; // Re-throw the error to be handled by the caller
+    });
+}
+
+// Profile edit function
+function handleProfileEditSubmit(values) {
+  // Get the new profile data from the form inputs
+  const name = profileTitleInput.value;
+  const about = profileDescriptionInput.value;
+
+   // Call the API to update user info
+   api.updateUserInfo(name, about)
+   .then((userData) => {
+     userInfo.setUserInfo(userData); // Update the UI with the new profile data
+     editProfilePopup.close();
+   })
+   .catch((error) => {
+     console.log(error);
+   });
+
+}
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -89,67 +168,7 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-
 const addCardBtn = document.querySelector(".profile__add-button");
-
-function handleProfileEditSubmit(values) {
-  // Get the new profile data from the form inputs
-  const name = profileTitleInput.value;
-  const about = profileDescriptionInput.value;
-
-   // Call the API to update user info
-   api.updateUserInfo(name, about)
-   .then((userData) => {
-     userInfo.setUserInfo(userData); // Update the UI with the new profile data
-     editProfilePopup.close();
-   })
-   .catch((error) => {
-     console.log(error);
-   });
-
-}
-
-function handleAddCardSubmit(values) {
-  const name = values.title;
-  const link = values.link;
-  
-  // Call API method to add a new card
-  api.addNewCard(name, link)
-    .then((newCard) => {
-      // Render the newly created card
-      const cardElement = renderCard(newCard);
-
-      // Ensure cardSection is accessible and addItem method is defined
-      if (cardSection && cardSection.addItem) {
-        cardSection.addItem(cardElement);
-        addCardPopup.close();
-      } else {
-        console.error('cardSection or addItem method is undefined.');
-      }
-    })
-    .catch((error) => {
-      console.error('Error adding new card:', error);
-    });
-}
-
-function handleCardClick(name, link) {
-  previewImageModal.open(name, link);
-}
-
-function handleDeleteCard(card) {
-  confirmModal.open();
-
-  confirmModal.setSubmitAction(() => {
-    api.deleteCard(card.id)
-    .then(() => {
-      card.deleteCard();
-      confirmModal.close();
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  })
-}
 
 // Edit Modal Listeners
 profileEditBtn.addEventListener("click", () => {

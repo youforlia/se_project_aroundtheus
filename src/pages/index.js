@@ -7,7 +7,7 @@ import UserInfo from "../components/UserInfo.js";
 import { config } from "../utils/constants.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
-import Api from "./Api.js";
+import Api from "../components/Api.js";
 
 //APIs
 const api = new Api({
@@ -18,7 +18,6 @@ const api = new Api({
   },
 });
 
-export default api;
 
 export function renderCard(cardData) {
   const card = new Card(
@@ -112,9 +111,22 @@ function handleDeleteCard(card) {
 }
 
 // Like Card function
-function handleLikeCard(cardId, isLiked) {
-  return api.updateLikeStatus(cardId, isLiked)
+// function handleLikeCard(cardId, isLiked) {
+//   return api.updateLikeStatus(cardId, isLiked)
+//     .then((updatedCardData) => {
+//       return updatedCardData; // Assuming the API returns the updated card data
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       throw error; // Re-throw the error to be handled by the caller
+//     });
+// }
+
+function handleLikeCard(card) {
+  return api.toggleLikeCard(card.getId(), !card.getIsLiked())
     .then((updatedCardData) => {
+      console.log(`updatedCardData:`, updatedCardData);
+      card.updateLikeValue(updatedCardData.isLiked);
       return updatedCardData; // Assuming the API returns the updated card data
     })
     .catch((error) => {

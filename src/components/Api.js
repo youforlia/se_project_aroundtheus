@@ -105,10 +105,10 @@ export default class Api {
   }
   }
 
-  export const api = new Api({
-    baseUrl: "https://around-api.en.tripleten-services.com/v1",
-    headers: {
-      authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-      "Content-Type": "application/json",
-    },
-  });
+  // export const api = new Api({
+  //   baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  //   headers: {
+  //     authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
+  //     "Content-Type": "application/json",
+  //   },
+  // });

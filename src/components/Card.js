@@ -10,8 +10,7 @@ export default class Card {
     this._handleLikeCard = handleLikeCard;
 
     this._cardElement = null; // Initialize _cardElement
-    // this.getView();
-    // this._setEventListeners();
+
   }
 
 
@@ -54,6 +53,15 @@ export default class Card {
     return this.id;
   }
 
+  _updateLikeButton() {
+    const likeButton = this._cardElement.querySelector(".cards__like-button");
+    if (this._isLiked) {
+      likeButton.classList.add("cards__like-button_active");
+    } else {
+      likeButton.classList.remove("cards__like-button_active");
+    }
+  }
+
   deleteCard() {
     this._cardElement.remove();
     this._element = null;
@@ -71,7 +79,8 @@ export default class Card {
 
     // Update the like button state based on the initial like state
     this._updateLikeButton();
-
+    this._setEventListeners();
     return this._cardElement;
   }
+
 }

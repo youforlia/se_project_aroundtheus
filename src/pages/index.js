@@ -27,8 +27,6 @@ export function renderCard(cardData) {
     handleDeleteCard,
     handleLikeCard
   );
-  // const cardEl = card.getView();
-  // return cardEl;
   return card.getView();
 }
 
@@ -39,7 +37,6 @@ let cardSection;
 api.loadPage()
   .then(([initialCards, userData]) => {
     
-
     // Initialize and render the card section
     cardSection = new Section(
       {
@@ -65,6 +62,11 @@ api.loadPage()
     console.log(error);
   });
 
+// Preview image
+function handleCardClick(name, link) {
+  previewImageModal.open(name, link);
+}
+
 // Add card function
 function handleAddCardSubmit(values) {
   const name = values.title;
@@ -89,9 +91,30 @@ function handleAddCardSubmit(values) {
     });
 }
 
-// Preview image
-function handleCardClick(name, link) {
-  previewImageModal.open(name, link);
+// Update avatar function
+function handleAvatarUpdate() {
+  // Prevent the default form submission behavior
+  // event.preventDefault();
+
+  // Get the link value from the input field
+  const linkInput = document.getElementById('new-avatar-link-input');
+  const link = linkInput.value;
+
+  // Ensure api.updateAvatar exists
+  if (typeof api.updateAvatar !== 'function') {
+    console.error('updateAvatar function is not defined in the API');
+    return;
+  }
+
+  // Call the API to update the avatar
+  api.updateAvatar(link)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      updateAvatarPopup.close(); // Ensure updateAvatarPopup is the correct reference
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 // Delete card function
@@ -110,18 +133,7 @@ function handleDeleteCard(card) {
   })
 }
 
-// Like Card function
-// function handleLikeCard(cardId, isLiked) {
-//   return api.updateLikeStatus(cardId, isLiked)
-//     .then((updatedCardData) => {
-//       return updatedCardData; // Assuming the API returns the updated card data
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       throw error; // Re-throw the error to be handled by the caller
-//     });
-// }
-
+// Toggle like/dislike on card function
 function handleLikeCard(card) {
   return api.toggleLikeCard(card.getId(), !card.getIsLiked())
     .then((updatedCardData) => {
@@ -153,17 +165,29 @@ function handleProfileEditSubmit(values) {
 
 }
 
+
+
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = addCardModal.querySelector("#add-card-form");
+const updateAvatarModal = document.querySelector("#update-avatar-modal");
+const updateAvatarForm = updateAvatarModal.querySelector("update-avatar-form");
 
+// Update User Info
 const editProfilePopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
 editProfilePopup.setEventListeners();
+
+// Update Avatar
+const updateAvatarPopup = new PopupWithForm(
+  "#update-avatar-modal",
+  handleAvatarUpdate
+);
+updateAvatarPopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
 addCardPopup.setEventListeners();
@@ -173,6 +197,7 @@ previewImageModal.setEventListeners();
 
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
+const updateAvatarBtn = document.querySelector("#profile-image-edit-btn");
 const profileCloseBtn = profileEditModal.querySelector(".modal__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
@@ -191,6 +216,13 @@ profileEditBtn.addEventListener("click", () => {
   editProfilePopup.open();
 });
 
+updateAvatarBtn.addEventListener("click", () => {
+  updateAvatarPopup.open();
+  //validator here?
+} )
+
+
+
 // Add Card Modal Listeners
 addCardBtn.addEventListener("click", () => {
   cardFormValidator.resetValidation();
@@ -208,4 +240,8 @@ cardFormValidator.enableValidation();
 // instantiate PopupWithConfirmation
 const confirmModal = new PopupWithConfirmation("#confirm-delete-modal");
 confirmModal.setEventListeners();
+
+// Update Avatar
+document.getElementById('update-avatar-form').addEventListener('submit', handleAvatarUpdate);
+
 

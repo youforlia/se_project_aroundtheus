@@ -65,22 +65,7 @@ export default class Api {
     });
   }
 
-  // LIKE CARD
-  // likeCard() {
-  //   return this._request(`${this._baseUrl}/cards/${id}/likes`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //   });
-  // }
-
-  // // DISLIKE CARD
-  // dislikeCard() {
-  //   return this._request(`${this._baseUrl}/cards/${id}/likes`, {
-  //     method: "DELETE",
-  //     headers: this._headers,
-  //   });
-  // }
-
+// TOGGLE LIKE/DISLIKE CARD
   toggleLikeCard(cardId, isLiked) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "PUT" : "DELETE",
@@ -104,11 +89,3 @@ export default class Api {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
   }
-
-  // export const api = new Api({
-  //   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  //   headers: {
-  //     authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-  //     "Content-Type": "application/json",
-  //   },
-  // });

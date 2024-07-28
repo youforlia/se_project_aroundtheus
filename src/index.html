@@ -18,18 +18,28 @@
         />
       </header>
       <main class="content">
+
         <!-- Profile Section -->
         <section class="profile page__section">
+          <div class="profile__image-container">
           <img
             src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="avatar"
             class="profile__image"
           />
+          <button
+            type="button"
+            aria-label="Edit"
+            class="profile__image-edit-button"
+            id="profile-image-edit-btn"
+          ></button>
+          </div>
+      
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteaus</h1>
             <button
               type="button"
-              aria-label="Edit"
+              aria-label="Edit Avatar"
               class="profile__edit-button"
               id="profile-edit-btn"
             ></button>
@@ -166,10 +176,39 @@
             >
               Yes
             </button>
-            <!-- <button id="confirmDelete">Yes</button> -->
           </div>
         </div>
       </div>
+
+      <!-- Update Avatar Modal -->
+       <div class="modal" id="update-avatar-modal">
+        <div class="modal__update-avatar-container">
+          <button
+            class="modal__close-button"
+            id="confirm-close-button">
+          </button>
+
+          <form class="modal__form" id="update-avatar-form">
+            <h2 class="modal__form-pp-header">Change Profile Picture</h2>
+            <fieldset class="modal__form-fieldset">
+              <input
+                type="url"
+                id="new-avatar-link-input"
+                class="modal__form-input modal__input"
+                name="link"
+                placeholder="Image link"
+                required
+              />
+              <span class="modal__error" id="new-avatar-link-input-error"></span>
+            </fieldset>
+            <fieldset class="modal__form-fieldset">
+              <button type="submit" class="modal__submit-button modal__button">
+                Submit
+              </button>
+            </fieldset>
+          </form>
+        </div>
+       </div>
 
       <!-- Card Template -->
       <template id="card-template">
@@ -191,8 +230,5 @@
         </div>
       </template>
     </div>
-    <!-- <script src="./components/FormValidator.js" type="module"></script> -->
-    <!-- <script src="./pages/index.js" type="module"></script> -->
-    <!-- <script src="./utils/utils.js" type="module"></script> -->
   </body>
 </html>

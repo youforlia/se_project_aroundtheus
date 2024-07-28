@@ -84,7 +84,43 @@
   width: 120px;
   border-radius: 50%;
   margin-right: 24px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
+
+/* .profile__image:hover {
+  opacity: 0.3;
+} */
+
+.profile__image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile__image-edit-button {
+  background: transparent url(../images/pencil-icon.svg) center no-repeat;
+  background-size: 75%;
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+  padding: 7px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.profile__image-container:hover .profile__image-edit-button {
+  opacity: 1;
+} 
+
+.profile__image-container:hover .profile__image {
+  opacity: 0.3;
+} 
 
 @media screen and (max-width: 1100px) {
   .profile {

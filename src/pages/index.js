@@ -8,6 +8,7 @@ import { config } from "../utils/constants.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 import Api from "../components/Api.js";
+import { setLoading } from "../components/PopupWithForm.js";
 
 //APIs
 const api = new Api({
@@ -71,34 +72,46 @@ function handleCardClick(name, link) {
 function handleAddCardSubmit(values) {
   const name = values.title;
   const link = values.link;
-  
+    
+  // Set loading state
+  setLoading(true);
+
   // Call API method to add a new card
   api.addNewCard(name, link)
     .then((newCard) => {
       // Render the newly created card
       const cardElement = renderCard(newCard);
 
+      setLoading(false);
+      addCardPopup.close();
+
       // Ensure cardSection is accessible and addItem method is defined
       if (cardSection && cardSection.addItem) {
         cardSection.addItem(cardElement);
-        addCardPopup.close();
       } else {
         console.error('cardSection or addItem method is undefined.');
       }
+      
     })
     .catch((error) => {
       console.error('Error adding new card:', error);
+      // Reset loading state in case of an error
     });
 }
 
+
+  
 // Update avatar function
-function handleAvatarUpdate() {
-  // Prevent the default form submission behavior
-  // event.preventDefault();
+function handleAvatarUpdate(formData) {
+  setLoading(true);
 
   // Get the link value from the input field
-  const linkInput = document.getElementById('new-avatar-link-input');
-  const link = linkInput.value;
+  // const linkInput = document.getElementById('new-avatar-link-input');
+  // const link = linkInput.value;
+  const avatarUrl = formData.avatar;
+
+  // console.log('Updating Avatar URL:', avatarUrl);
+
 
   // Ensure api.updateAvatar exists
   if (typeof api.updateAvatar !== 'function') {
@@ -107,13 +120,15 @@ function handleAvatarUpdate() {
   }
 
   // Call the API to update the avatar
-  api.updateAvatar(link)
+  api.updateAvatar(avatarUrl)
     .then((res) => {
       userInfo.setUserInfo(res);
+      setLoading(false);
       updateAvatarPopup.close(); // Ensure updateAvatarPopup is the correct reference
     })
     .catch((error) => {
       console.error(error);
+      setLoading(false); // Reset loading state in case of error
     });
 }
 
@@ -144,6 +159,7 @@ function handleLikeCard(card) {
     .catch((error) => {
       console.log(error);
       throw error; // Re-throw the error to be handled by the caller
+      
     });
 }
 
@@ -153,19 +169,21 @@ function handleProfileEditSubmit(values) {
   const name = profileTitleInput.value;
   const about = profileDescriptionInput.value;
 
+ setLoading(true);
+
    // Call the API to update user info
    api.updateUserInfo(name, about)
    .then((userData) => {
      userInfo.setUserInfo(userData); // Update the UI with the new profile data
+     setLoading(false); 
      editProfilePopup.close();
    })
    .catch((error) => {
      console.log(error);
+    //  editprofilepopup.setLoading(false); // Set loading state to false even if there's an error
    });
 
 }
-
-
 
 // Wrappers
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -189,7 +207,10 @@ const updateAvatarPopup = new PopupWithForm(
 );
 updateAvatarPopup.setEventListeners();
 
-const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
+const addCardPopup = new PopupWithForm(
+  "#add-card-modal", 
+  handleAddCardSubmit
+);
 addCardPopup.setEventListeners();
 
 const previewImageModal = new PopupWithImage("#preview-image-modal");
@@ -220,8 +241,6 @@ updateAvatarBtn.addEventListener("click", () => {
   updateAvatarPopup.open();
   //validator here?
 } )
-
-
 
 // Add Card Modal Listeners
 addCardBtn.addEventListener("click", () => {

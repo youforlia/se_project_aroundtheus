@@ -7,17 +7,19 @@ export default class Api {
 
 
   _request(url, options) {
+    console.log(`Requesting: ${url}`, options); // Log the request details
+
     return fetch(url, options)
     .then(this._handleResponse);
   }
 
-  _handleResponse(res) {
+
+  _handleResponse = (res) => {
     if (res.ok) {
       return res.json();
     }
-    // if the server returns an error, reject the promise
     return Promise.reject(`Error: ${res.status}`);
-  }
+  };
 
   // FETCH INITIAL CARDS  
   getInitialCards() {
@@ -75,12 +77,14 @@ export default class Api {
 
   // UPDATE AVATAR
   updateAvatar(link) {
+    console.log('Updating Avatar with link:', link); // Log the update request
+
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: link
-      }),
+      })
     });
   }
 

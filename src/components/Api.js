@@ -7,8 +7,6 @@ export default class Api {
 
 
   _request(url, options) {
-    console.log(`Requesting: ${url}`, options); // Log the request details
-
     return fetch(url, options)
     .then(this._handleResponse);
   }

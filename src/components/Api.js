@@ -75,8 +75,6 @@ export default class Api {
 
   // UPDATE AVATAR
   updateAvatar(link) {
-    console.log('Updating Avatar with link:', link); // Log the update request
-
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,

@@ -9,10 +9,13 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleLikeCard = handleLikeCard;
 
-    this._cardElement = null; // Initialize _cardElement
+    // Define class fields
+    this._cardElement = null;
+    this._likeButton = null;
+    this._cardImage = null;
+    this._deleteButton = null;
 
   }
-
 
   _setEventListeners() {
     // Ensure _cardElement is defined before adding event listeners

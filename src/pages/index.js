@@ -4,77 +4,227 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, config } from "../utils/constants.js";
+import { config } from "../utils/constants.js";
 import "./index.css";
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
+import Api from "../components/Api.js";
+// import { setLoading } from "../components/PopupWithForm.js";
 
-// Wrappers
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
-const addCardModal = document.querySelector("#add-card-modal");
-const addCardForm = addCardModal.querySelector("#add-card-form");
-
-const userInfo = new UserInfo({
-  nameSelector: ".profile__title",
-  jobSelector: ".profile__description",
+//APIs
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
+    "Content-Type": "application/json",
+  },
 });
 
+export function renderCard(cardData) {
+  const card = new Card(
+    cardData,
+    "#card-template",
+    handleCardClick,
+    handleDeleteCard,
+    handleLikeCard
+  );
+  return card.getView();
+}
+
+let userInfo;
+let cardSection;
+
+// Load initial cards
+api.loadPage()
+  .then(([initialCards, userData]) => {
+    
+    // Initialize and render the card section
+    cardSection = new Section(
+      {
+        items: initialCards,
+        renderer: (cardData) => {
+          const cardElement = renderCard(cardData)
+          cardSection.addItem(cardElement);
+        }
+      },
+      "#cards__list"
+    );
+    cardSection.renderItems();
+
+    // Update user profile
+    userInfo = new UserInfo({
+      nameSelector: ".profile__title",
+      jobSelector: ".profile__description",
+      imageSelector: ".profile__image"
+    });
+    userInfo.setUserInfo(userData);
+  })
+  .catch(console.error);
+
+// Preview image
+function handleCardClick(name, link) {
+  previewImageModal.open(name, link);
+}
+
+const addCardPopup = new PopupWithForm(
+  "#add-card-modal", 
+  handleAddCardSubmit
+);
+addCardPopup.setEventListeners();
+
+// Add card function
+function handleAddCardSubmit(values) {
+  const name = values.title;
+  const link = values.link;
+    
+  // Set loading state
+  addCardPopup.setLoading(true);
+
+  // Call API method to add a new card
+  api.addNewCard(name, link)
+    .then((newCard) => {
+      // Render the newly created card
+      const cardElement = renderCard(newCard);
+
+      addCardPopup.close();
+
+      // Ensure cardSection is accessible and addItem method is defined
+      if (cardSection && cardSection.addItem) {
+        cardSection.addItem(cardElement);
+      } else {
+        console.error('cardSection or addItem method is undefined.');
+      }
+      
+    })
+    .catch((error) => {
+      console.error('Error adding new card:', error);
+      // Reset loading state in case of an error
+    })
+    .finally(() => {
+      //reset loading state in any case
+      addCardPopup.setLoading(false);
+    })
+}
+
+
+// Update Avatar
+const updateAvatarPopup = new PopupWithForm(
+  "#update-avatar-modal",
+  handleAvatarUpdate
+);
+updateAvatarPopup.setEventListeners();
+
+// Update avatar function
+function handleAvatarUpdate(formData) {
+  
+
+  const avatarUrl = formData.link;
+  updateAvatarPopup.setLoading(true);
+
+  // Ensure api.updateAvatar exists
+  if (typeof api.updateAvatar !== 'function') {
+    console.error('updateAvatar function is not defined in the API');
+    return;
+  }
+
+ // Call the API to update the avatar
+ api.updateAvatar(avatarUrl)
+ .then((res) => {
+   userInfo.setUserInfo(res);
+   updateAvatarPopup.close(); 
+ })
+ .catch(console.error)
+ .finally(() => {
+  // Reset loading state in any case
+  updateAvatarPopup.setLoading(false);
+ });
+}
+
+// instantiate PopupWithConfirmation
+const confirmModal = new PopupWithConfirmation("#confirm-delete-modal");
+confirmModal.setEventListeners();
+
+// Delete card function
+function handleDeleteCard(card) {
+  confirmModal.open();
+
+  confirmModal.setSubmitAction(() => {
+    api.deleteCard(card.id)
+    .then(() => {
+      card.deleteCard();
+      confirmModal.close();
+    })
+    .catch(console.error);
+  })
+}
+
+// Toggle like/dislike on card function
+function handleLikeCard(card) {
+  return api.toggleLikeCard(card.getId(), !card.getIsLiked())
+    .then((updatedCardData) => {
+      card.updateLikeValue(updatedCardData.isLiked);
+      return updatedCardData; // Assuming the API returns the updated card data
+    })
+    .catch(console.error);
+}
+
+// Update User Info
 const editProfilePopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
 editProfilePopup.setEventListeners();
 
-const addCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
-addCardPopup.setEventListeners();
+// Profile edit function
+function handleProfileEditSubmit(values) {
+  // Get the new profile data from the form inputs
+  const name = values.name;
+  const about = values.description;
+
+  console.log('Profile Edit Submit:', { name, about });
+
+  if (!name || !about) {
+    console.error('Name or about is undefined');
+    return;
+  }
+
+ editProfilePopup.setLoading(true);
+
+   // Call the API to update user info
+   api.updateUserInfo(name, about)
+   .then((userData) => {
+     userInfo.setUserInfo(userData); // Update the UI with the new profile data
+     editProfilePopup.close();
+   })
+   .catch(console.error)
+   .finally(() => {
+    // reset loading state in any case
+    editProfilePopup.setLoading(false); 
+   })
+
+}
+
+
+// Wrappers
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
+const addCardModal = document.querySelector("#add-card-modal");
+const addCardForm = addCardModal.querySelector("#add-card-form");
+const updateAvatarModal = document.querySelector("#update-avatar-modal");
+const updateAvatarForm = updateAvatarModal.querySelector("#update-avatar-form");
+
 
 const previewImageModal = new PopupWithImage("#preview-image-modal");
 previewImageModal.setEventListeners();
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  "#cards__list"
-);
-cardSection.renderItems();
-
 // Elements Edit Modal
 const profileEditBtn = document.querySelector("#profile-edit-btn");
+const updateAvatarBtn = document.querySelector("#profile-image-edit-btn");
 const profileCloseBtn = profileEditModal.querySelector(".modal__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
-
+const profileDescriptionInput = document.querySelector("#profile-description-input");
 const addCardBtn = document.querySelector(".profile__add-button");
-
-export function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleCardClick);
-  const cardEl = card.getView();
-
-  //add items here
-  cardSection.addItem(cardEl);
-}
-
-function handleProfileEditSubmit(values) {
-  userInfo.setUserInfo(values);
-  editProfilePopup.close();
-}
-
-function handleAddCardSubmit(values) {
-  const name = values.title;
-  const link = values.link;
-  {
-    return renderCard({ name, link });
-  }
-}
-
-function handleCardClick(name, link) {
-  previewImageModal.open(name, link);
-}
 
 // Edit Modal Listeners
 profileEditBtn.addEventListener("click", () => {
@@ -83,6 +233,12 @@ profileEditBtn.addEventListener("click", () => {
   profileDescriptionInput.value = user.job;
   profileFormValidator.resetValidation();
   editProfilePopup.open();
+});
+
+// Update Avatar Modal Listener
+updateAvatarBtn.addEventListener("click", () => {
+  avatarFormValidator.resetValidation();
+  updateAvatarPopup.open();
 });
 
 // Add Card Modal Listeners
@@ -97,3 +253,10 @@ profileFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(config, addCardForm);
 cardFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(config, updateAvatarForm);
+avatarFormValidator.enableValidation();
+
+
+
+

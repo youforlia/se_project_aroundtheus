@@ -26,7 +26,7 @@
 }
 
 .modal__form {
-  background: #ffffff;
+  background: #fff;
   box-sizing: border-box;
   padding: 36px;
   font-family: "Inter", sans-serif;
@@ -135,7 +135,67 @@
   max-height: 75vh;
 }
 
-@media screen and (min-width: 320px) and (max-width: 560px) {
+/*Confirm Delete Modal*/
+.modal__confirm-container {
+  position: relative;
+  max-width: 430px;
+  max-height: 181px;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 36px;
+  font-family: "Inter", sans-serif;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+.modal__confirm-delete-header {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__confirm-delete-button {
+  min-width: 117px;
+  min-height: 50px;
+  background: #000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 18px;
+  border: none;
+  margin-top: 30px;
+  padding: 13px 149px;
+}
+
+.modal__confirm-delete-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/*Update Avatar Modal*/
+.modal__update-avatar-container {
+  position: relative;
+  max-width: 430px;
+  max-height: 280px;
+}
+
+.modal__form-pp-header {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+/* MEDIA SCREEN */
+@media screen and (max-width: 560px) {
   .modal__container {
     position: relative;
     max-width: 282px;
@@ -147,11 +207,15 @@
     padding: 25px 22px;
   }
 
+  .modal__form-header {
+    font-size: 18px;
+    margin-bottom: 40px;;
+  }
+
   .modal__form-input {
     min-width: 236px;
     min-height: 35px;
     padding: 0;
-    margin: 0 0 30px;
   }
 
   .modal__submit-button {
@@ -162,11 +226,6 @@
     line-height: 16px;
   }
 
-  .modal__form-header {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
   .modal__close-button {
     background: transparent url(../images/close-icon.svg) center no-repeat;
     width: 40px;
@@ -174,14 +233,66 @@
     border: 0;
     position: absolute;
     top: -45px;
-    right: 17px;
+    right: 15px;
     opacity: 1;
     transition: opacity 0.5s ease;
   }
 
-  .modal__close-button_preview {
+  /* Avatar Update */
+  .modal__update-avatar-container {
+    position: relative;
+    max-width: 430px;
+    max-height: 280px;
+  }
+  
+  .modal__form-pp-header {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+
+  /* Confirm Delete */
+  .modal__confirm-container {
+    position: relative;
+    max-width: 280px;
+    max-height: 181px;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 36px;
+    font-family: "Inter", sans-serif;
+    border-radius: 10px;
+    z-index: 99;
+  }
+
+  .modal__confirm-delete-header {
+    font-size: 18px;
+  }
+  
+  .modal__confirm-delete-button {
+    min-width: 117px;
+    min-height: 50px;
+    background: #000;
+    border-radius: 2px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 18px;
+    border: none;
+    margin-top: 30px;
+    padding: 0 75px;
+  }
+
+  /* Avatar and confirm delete btn */
+  .modal__close-button2 {
+    background: transparent url(../images/close-icon.svg) center no-repeat;
+    width: 40px;
+    height: 40px;
+    border: 0;
     position: absolute;
-    top: -45px;
-    right: -35px;
+    top: -55px;
+    right: -3px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
   }
 }
+
+
+

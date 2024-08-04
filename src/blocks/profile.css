@@ -99,8 +99,8 @@
   background: transparent url(../images/pencil-icon.svg) center no-repeat;
   background-size: 75%;
   position: absolute;
-  top: 50%;
-  left: 43%;
+  top: 48%;
+  left: 42%;
   transform: translate(-50%, -50%);
   padding: 7px;
   width: 24px;
@@ -145,6 +145,22 @@
   .profile__add-button {
     margin-right: 0;
     margin-left: 0;
+  }
+
+  .profile__image-edit-button {
+    background: transparent url(../images/pencil-icon.svg) center no-repeat;
+    background-size: 75%;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 }
 

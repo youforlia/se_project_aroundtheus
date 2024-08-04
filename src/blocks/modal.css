@@ -195,7 +195,7 @@
 }
 
 /* MEDIA SCREEN */
-@media screen and (min-width: 441px) and (max-width: 560px) {
+@media screen and (max-width: 560px) {
   .modal__container {
     position: relative;
     max-width: 282px;
@@ -207,39 +207,15 @@
     padding: 25px 22px;
   }
 
-  .modal__form-input {
-    min-width: 236px;
-    min-height: 35px;
-    padding: 0;
-    margin: 0 0 30px;
-  }
-
-  .modal__submit-button {
-    min-width: 236px;
-    margin-top: 48px;
-    padding: 0;
-    font-size: 14px;
-    line-height: 16px;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 440px) {
-  .modal__container {
-    position: relative;
-    max-width: 282px;
-    max-height: 322px;
-    padding: 13px 19px 0;
-  }
-
-  .modal__form {
-    padding: 25px 22px;
+  .modal__form-header {
+    font-size: 18px;
+    margin-bottom: 40px;;
   }
 
   .modal__form-input {
     min-width: 236px;
     min-height: 35px;
     padding: 0;
-    margin: 0 0 30px;
   }
 
   .modal__submit-button {
@@ -261,9 +237,20 @@
     opacity: 1;
     transition: opacity 0.5s ease;
   }
-}
 
-@media screen and (min-width: 320px) and (max-width: 520px) {
+  /* Avatar Update */
+  .modal__update-avatar-container {
+    position: relative;
+    max-width: 430px;
+    max-height: 280px;
+  }
+  
+  .modal__form-pp-header {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+
+  /* Confirm Delete */
   .modal__confirm-container {
     position: relative;
     max-width: 280px;
@@ -275,16 +262,9 @@
     border-radius: 10px;
     z-index: 99;
   }
-  
+
   .modal__confirm-delete-header {
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000;
-    padding: 0;
-    margin: 0;
+    font-size: 18px;
   }
   
   .modal__confirm-delete-button {
@@ -293,22 +273,26 @@
     background: #000;
     border-radius: 2px;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
     border: none;
     margin-top: 30px;
-    padding: 0 80px;
+    padding: 0 75px;
   }
-  
-  .modal__close-button {
+
+  /* Avatar and confirm delete btn */
+  .modal__close-button2 {
     background: transparent url(../images/close-icon.svg) center no-repeat;
     width: 40px;
     height: 40px;
     border: 0;
     position: absolute;
-    top: -45px;
-    right: 0;
+    top: -55px;
+    right: -3px;
     opacity: 1;
     transition: opacity 0.5s ease;
   }
 }
+
+
+

@@ -177,8 +177,15 @@ editProfilePopup.setEventListeners();
 // Profile edit function
 function handleProfileEditSubmit(values) {
   // Get the new profile data from the form inputs
-  const name = profileTitleInput.value;
-  const about = profileDescriptionInput.value;
+  const name = values.name;
+  const about = values.description;
+
+  console.log('Profile Edit Submit:', { name, about });
+
+  if (!name || !about) {
+    console.error('Name or about is undefined');
+    return;
+  }
 
  editProfilePopup.setLoading(true);
 
@@ -216,9 +223,7 @@ const profileCloseBtn = profileEditModal.querySelector(".modal__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
+const profileDescriptionInput = document.querySelector("#profile-description-input");
 const addCardBtn = document.querySelector(".profile__add-button");
 
 // Edit Modal Listeners
